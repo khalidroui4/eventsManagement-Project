@@ -1,13 +1,81 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html , body {
+    margin:0;
+    padding: 0;
+    height: 100%;
+}
+.navbar nav{
+  background:#255555;
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  padding:30px 40px;
+  height:35px;
+  
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.navbar .item{
+  position:relative;
+  text-decoration:none;
+  color:#ffffff;
+  font-family:'Righteous', Arial, sans-serif;
+  text-transform:uppercase;
+  cursor:pointer;
+  text-shadow: 0px 0px 20px white;
+}
+
+.navbar .linktext{
+  font-size:18px;
+  position:relative;
+  z-index:2;
+  color:#E5EEFF;
+  transition:transform .25s ease, color .25s ease;
+  text-align: center;
+}
+
+.navbar .linktext:before,
+.navbar .linktext:after{
+  opacity:0;
+  position:absolute;
+  top:6px;
+  left:0;
+  width:100%;
+  transform:translateY(32px);
+  transition:.25s ease;
+}
+
+.navbar .linktext:before{
+  content:'';
+  height:2px;
+  background:#3c8a8a;
+}
+
+.navbar .linktext:after{
+  content:attr(data-text);
+  font-size:.55em;
+  color:#4fbbbb;
+  margin-top:3px;
+}
+
+.navbar .item:hover .linktext{
+  transform:scale(1.15);
+  color:#FFFFFF;
+}
+
+.navbar .item:hover .linktext:before,
+.navbar .item:hover .linktext:after{
+  opacity:1;
+  transform:translateY(14px);
+}
+
+@media (max-width:900px){
+  .navbar nav{
+    flex-wrap:wrap;
+    gap:20px;
+  }
+}
+
+@media (max-width:600px){
+  .navbar .linktext{
+    font-size:1em;
+  }
 }
