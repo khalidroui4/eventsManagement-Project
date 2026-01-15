@@ -1,0 +1,121 @@
+.events-container {
+  padding: 40px;
+  background: #83b7b7;
+  min-height: 100vh;
+}
+
+.events-container h2 {
+  color: #0f2f2f;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.event-card {
+  background: #9ccccc;
+  padding: 20px;
+  border-radius: 18px;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  transition: 0.25s ease;
+}
+
+.event-card:hover {
+  transform: scale(1.03);
+  background: #bfe3e3;
+}
+
+.event-card h3 {
+  color: #0f2f2f;
+  margin-bottom: 10px;
+}
+
+.event-card p {
+  color: #1e5e5e;
+  font-size: 14px;
+}
+
+/* ETAT BADGE */
+.etat {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: white;
+  text-transform: uppercase;
+}
+
+.etat.ouvert { background: #2f8f8f; }
+.etat.complet { background: #a33; }
+.etat.annule { background: #666; }
+.etat.termine { background: #555; }
+.etat.archive { background: #333; }
+
+/* DETAILS PAGE */
+
+.event-details-container {
+  background: #83b7b7;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.event-details-card {
+  background: #9ccccc;
+  padding: 30px;
+  border-radius: 20px;
+  width: 500px;
+  position: relative;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+.details-row {
+  margin: 8px 0;
+  color: #0f2f2f;
+}
+
+.description {
+  margin-top: 15px;
+  color: #1e5e5e;
+  line-height: 1.5;
+}
+.participate-btn {
+  margin-top: 20px;
+  background: #255555;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.participate-btn:hover {
+  background: #1c4444;
+  transform: scale(1.05);
+}
+
+.cancel-btn {
+  margin-top: 20px;
+  background: #a33;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cancel-btn:hover {
+  background: #822;
+  transform: scale(1.05);
+}

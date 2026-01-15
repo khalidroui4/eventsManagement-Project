@@ -1,11 +1,14 @@
 import React from 'react'
+import "../styles/index.css"
 
-function footer() {
+function Footer() {
   return (
-    <div>
-      
-    </div>
+    <footer style={{marginBottom:"0"}}>
+      <p>
+        &copy; 2026 E-gestion. Tous droits réservés. <br/>
+      </p>
+    </footer>
   )
 }
 
-export default footer
+export default Footer

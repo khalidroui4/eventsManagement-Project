@@ -1,34 +1,64 @@
-import "../index.css";
-import { Link } from "react-router-dom";
+import "../styles/index.css";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../store/authSlice";
+
 function Navbar() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/signIn");
+  };
+
   return (
-    <header class="navbar" style={{boxShadow:"0px 0px 8px black"}}  >
+    <header className="navbar">
       <nav>
-        <Link class="item" to="/">
-          <div data-text="Main page" class="linktext">
-            Accueil
-          </div>
-        </Link>
-        <Link class="item" to="/about">
-          <div data-text="à propos de l'application" class="linktext">
-            About
-          </div>
-        </Link>
-        <Link class="item" to="/contact">
-          <div data-text="Contactez nous" class="linktext">
-            Contact
-          </div>
-        </Link>
-        <Link class="item" to="/signUp">
-          <div data-text="inscrire avec nous" class="linktext">
-            inscrire
-          </div>
-        </Link>
-        <Link class="item" to="/signIn">
-          <div data-text="connectez a votre compte" class="linktext">
-            Se connecter
-          </div>
-        </Link>
+        {/* NOT LOGGED IN */}
+        {!user && (
+          <>
+            <Link className="item" to="/">
+              <div className="linktext">Accueil</div>
+            </Link>
+            <Link className="item" to="/about">
+              <div className="linktext">About</div>
+            </Link>
+            <Link className="item" to="/contact">
+              <div className="linktext">Contact</div>
+            </Link>
+            <Link className="item" to="/signUp">
+              <div className="linktext">Inscrire</div>
+            </Link>
+            <Link className="item" to="/signIn">
+              <div className="linktext">Se connecter</div>
+            </Link>
+          </>
+        )}
+
+        {/* LOGGED IN */}
+        {user && (
+          <>
+            <Link className="item" to="/profile">
+              <div className="linktext">
+                Bienvenue {user.username}
+              </div>
+            </Link>
+
+            <Link className="item" to="/events">
+              <div className="linktext">Événements</div>
+            </Link>
+
+            <Link className="item" to="/profile">
+              <div className="linktext">Profil</div>
+            </Link>
+
+            <button className="item logout-btn" onClick={handleLogout}>
+              Déconnexion
+            </button>
+          </>
+        )}
       </nav>
     </header>
   );

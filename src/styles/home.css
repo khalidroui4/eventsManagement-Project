@@ -1,0 +1,109 @@
+.container {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.intro1 {
+  padding: 100px;
+  text-align: center;
+}
+.intro1 h1 {
+  font-size: 50px;
+}
+.intro1 p {
+  font-size: 18px;
+  width: 70%;
+  margin: auto;
+  color: rgb(100, 100, 100);
+}
+.btn1-intro1 {
+  margin-top: 20px;
+  margin-right: 15px;
+  padding: 20px;
+  border-radius: 15px;
+  border-color: transparent;
+  background-color: #132e2e;
+  color: #fff;
+  box-shadow: 0 0 20px #0000004f;
+}
+.btn1-intro1:hover {
+  background-color: #1f4646;
+  cursor: pointer;
+  transform: scale(1.04 );
+  transition: ease-out 0.2s ;
+}
+.btn2-intro1 {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 15px;
+  border-color: #76a8a8;
+  background-color: #83b7b7;
+  box-shadow: 0px 0px 20px #0000004f;
+  color: rgb(100, 100, 100);
+}
+.btn2-intro1:hover {
+  background-color: #76a8a8;
+  cursor: pointer;
+  transform: scale(1.04 );
+  transition: ease-out 0.2s ;
+}
+.intro2 {
+  background-color: #8dc1c1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+.intro2 .num {
+  font-size: 50px;
+  color: #132e2e;
+  font-weight: bold;
+}
+.intro2 .desc {
+  margin-top: -40px;
+  margin-bottom: 40px;
+}
+.intro3 {
+  padding: 30px;
+  text-align: center;
+}
+.intro3 .articleContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 10px;
+}
+.intro3 .article {
+  background-color: #8dc1c1;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.intro3 .article:hover{
+  background-color: #7cbaba;
+  transform: scale(1.03);
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+.intro4{
+ background-color: #8dc1c1;
+ padding: 30px; 
+ text-align: center;
+}
+.intro4 button {
+  margin-top: 20px;
+  margin-right: 15px;
+  padding: 20px;
+  border-radius: 15px;
+  border-color: transparent;
+  background-color: #132e2e;
+  color: #fff;
+  box-shadow: 0 0 20px #0000004f;
+}
+.intro4 button:hover {
+  background-color: #1f4646;
+  cursor: pointer;
+  transform: scale(1.04 );
+  transition: ease-out 0.2s ;
+}

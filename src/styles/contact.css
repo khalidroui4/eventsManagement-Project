@@ -1,0 +1,97 @@
+.contact1 {
+  padding: 40px;
+  text-align: center;
+}
+.contact1 p {
+  font-size: 18px;
+  color: rgb(100, 100, 100);
+  width: 50%;
+  margin: auto;
+}
+.contact2{
+  display: flex;
+  padding: 30px;
+  margin: auto;
+  
+  
+}
+.info1{
+  background-color: #8dc1c1;
+  padding: 30px;
+  border-radius: 15px;
+}
+.info .logo{
+  margin-top: 20px;
+  margin-right: 20px;
+}
+.info .infoText p{
+  font-size: 15px;
+  color: rgb(100, 100, 100);
+}
+.info2{
+  background-color: #8dc1c1;
+  padding: 30px;
+  border-radius: 15px;
+  margin-top: 40px;
+  height: 130px;
+}
+.sendinfo{
+  background-color: #8dc1c1;
+  padding: 30px;
+  border-radius: 15px;
+  margin-left: 40px;
+  width: 50%;
+}
+.sendinfo input{
+   background-color: #9cd4d4;
+   margin-top: -30px;
+  padding:10px;
+  border-radius: 10px;
+  align-items: center;
+}
+.sendinfo textarea{
+   background-color: #9cd4d4;
+  padding:20px;
+  border-radius: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+  resize: none;
+  overflow-y: hidden;
+  width: 95%;
+  height: 100px;
+  margin-top: -12px;
+  border-color: transparent;
+}
+.sendinfo button{
+  margin-top: 20px;
+  margin-right: 15px;
+  padding:8px 20px;
+  border-radius: 15px;
+  border-color: transparent;
+  background-color: #2b6565;
+  color: #fff;
+  box-shadow: 0 0 20px #0000004f;
+  display: flex;
+}
+.sendinfo button:hover{
+  background-color: #1e4848;
+  cursor: pointer;
+  transform: scale(1.1);
+}
+.contact3{
+  background-color: #8dc1c1;
+  padding: 30px;
+  border-radius: 15px;
+  margin:30px auto;
+  width: 90%;
+}
+.contact3 .questions{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:15px 100px;
+  max-width: 1000px;
+}
+.contact3 .questions p{
+  color: rgb(100, 100, 100);
+  font-size: 15px;
+}
