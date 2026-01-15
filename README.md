@@ -61,21 +61,44 @@ The system supports three roles: **User**, **Organizer**, and **Admin**, each wi
 project/
 │
 ├── frontend/
-│ ├── src/
-│ │ ├── pages/ # Home, Events, Profile, EventDetails, etc.
-│ │ ├── store/ # Redux slices
-│ │ ├── api/ # API handlers
-│ │ ├── Components/ # Navbar, Footer, Modals, etc.
-│ │ └── styles/ # CSS files
+│   └── src/
+│       ├── pages/
+│       │   ├── Home.jsx
+│       │   ├── Events.jsx
+│       │   ├── Profile.jsx
+│       │   ├── EventDetails.jsx
+│       │   └── Signin.jsx / Signup.jsx
+│       │
+│       ├── store/
+│       │   ├── authSlice.js
+│       │   ├── profileSlice.js
+│       │   ├── eventsSlice.js
+│       │   └── store.js
+│       │
+│       ├── api/
+│       │   └── profileApi.js
+│       │
+│       ├── Components/
+│       │   ├── Navbar.jsx
+│       │   ├── Footer.jsx
+│       │   └── Modals.jsx
+│       │
+│       ├── styles/
+│       │   ├── profile.css
+│       │   ├── events.css
+│       │   └── sign.css
+│       │
+│       └── utils/
+│           └── pageTransition.js
 │
-├── project_backend/
-│ ├── config.php
-│ ├── authentification.php
-│ ├── events.php
-│ ├── participations.php
-│ ├── organizer_requests.php
-│ ├── admin.php
-│ └── update_profile.php
+└── project_backend/
+    ├── config.php
+    ├── authentification.php
+    ├── events.php
+    ├── participations.php
+    ├── organizer_requests.php
+    ├── admin.php
+    └── update_profile.php
 
 
 ---
