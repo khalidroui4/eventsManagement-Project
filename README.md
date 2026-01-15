@@ -57,7 +57,9 @@ The system supports three roles: **User**, **Organizer**, and **Admin**, each wi
 ---
 
 ## 📁 Project Structure
+## 📁 Project Structure
 
+```text
 project/
 │
 ├── frontend/
@@ -67,7 +69,8 @@ project/
 │       │   ├── Events.jsx
 │       │   ├── Profile.jsx
 │       │   ├── EventDetails.jsx
-│       │   └── Signin.jsx / Signup.jsx
+│       │   ├── Signin.jsx
+│       │   └── Signup.jsx
 │       │
 │       ├── store/
 │       │   ├── authSlice.js
@@ -99,6 +102,9 @@ project/
     ├── organizer_requests.php
     ├── admin.php
     └── update_profile.php
+```
+
+
 
 
 ---
