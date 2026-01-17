@@ -2,8 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   updateProfile,
   getMyParticipations,
-  getMyCreatedEvents
+  getMyCreatedEvents,
+  getAllEvents   // <-- add this
 } from "../api/profileApi";
+
 
 export const fetchParticipations = createAsyncThunk(
   "profile/participations",
@@ -36,11 +38,27 @@ const profileSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      /* Participations */
+      .addCase(fetchParticipations.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(fetchParticipations.fulfilled, (state, action) => {
+        state.loading = false;
         state.participations = action.payload;
       })
+      .addCase(fetchParticipations.rejected, (state) => {
+        state.loading = false;
+      })
+      /* Created Events */
+      .addCase(fetchCreatedEvents.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(fetchCreatedEvents.fulfilled, (state, action) => {
+        state.loading = false;
         state.createdEvents = action.payload;
+      })
+      .addCase(fetchCreatedEvents.rejected, (state) => {
+        state.loading = false;
       });
   }
 });

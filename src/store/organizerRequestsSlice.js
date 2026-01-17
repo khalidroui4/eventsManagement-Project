@@ -2,7 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   sendOrganizerRequest,
   fetchOrganizerRequests,
-  approveOrganizerRequest
+  approveOrganizerRequest,
+  rejectOrganizerRequest
 } from "../api/organizerRequestsApi";
 
 export const loadRequests = createAsyncThunk(
@@ -19,6 +20,14 @@ export const sendRequest = createAsyncThunk(
 export const approveRequest = createAsyncThunk(
   "requests/approve",
   async (user_id) => await approveOrganizerRequest(user_id)
+);
+
+export const rejectRequest = createAsyncThunk(
+  "requests/reject",
+  async (user_id) => {
+    await rejectOrganizerRequest(user_id);
+    return user_id;
+  }
 );
 
 const requestsSlice = createSlice({

@@ -20,19 +20,29 @@ function Navbar() {
         {!user && (
           <>
             <Link className="item" to="/">
-              <div className="linktext">Accueil</div>
+              <div className="linktext" data-text="page principal">
+                Accueil
+              </div>
             </Link>
             <Link className="item" to="/about">
-              <div className="linktext">About</div>
+              <div className="linktext" data-text="a propos de nous">
+                About
+              </div>
             </Link>
             <Link className="item" to="/contact">
-              <div className="linktext">Contact</div>
+              <div className="linktext" data-text="contactez-nous">
+                Contact
+              </div>
             </Link>
             <Link className="item" to="/signUp">
-              <div className="linktext">Inscrire</div>
+              <div className="linktext" data-text="creer un compte">
+                Inscrire
+              </div>
             </Link>
             <Link className="item" to="/signIn">
-              <div className="linktext">Se connecter</div>
+              <div className="linktext" data-text="connecter votre compte">
+                Se connecter
+              </div>
             </Link>
           </>
         )}
@@ -41,22 +51,27 @@ function Navbar() {
         {user && (
           <>
             <Link className="item" to="/profile">
-              <div className="linktext">
+              <div className="linktext" data-text="Bienvenue">
                 Bienvenue {user.username}
               </div>
             </Link>
 
             <Link className="item" to="/events">
-              <div className="linktext">Événements</div>
+              <div className="linktext" data-text="notre evenement">
+                Événements
+              </div>
             </Link>
 
             <Link className="item" to="/profile">
-              <div className="linktext">Profil</div>
+              <div className="linktext" data-text="votre profil">
+                Profil
+              </div>
             </Link>
 
-            <button className="item logout-btn" onClick={handleLogout}>
-              Déconnexion
-            </button>
+              <button className="item logout-btn" onClick={handleLogout}>
+                Déconnexion
+              </button>
+            
           </>
         )}
       </nav>

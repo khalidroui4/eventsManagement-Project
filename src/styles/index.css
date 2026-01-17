@@ -1,13 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
 html,
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  min-height: 100vh;
+  /* Allow body to grow with content */
   background-color: #83b7b7;
   scroll-behavior: smooth;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
+  /* overflow-x: hidden; - Removed to prevent potential layout locking, let content dictate */
+  font-family: 'Outfit', sans-serif;
 }
 
 .navbar {
@@ -82,14 +86,36 @@ body {
 
 @media (max-width: 900px) {
   .navbar nav {
-    flex-wrap: wrap;
-    gap: 20px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 20px;
+    gap: 25px;
+    -webkit-overflow-scrolling: touch;
+    /* smooth scroll on iOS */
+  }
+
+  .navbar .item {
+    flex-shrink: 0;
+  }
+
+  /* Hide the intricate hover effects on mobile to save space/confusion */
+  .navbar .linktext:after {
+    display: none;
+  }
+
+  .navbar .linktext:before {
+    display: none;
   }
 }
 
 @media (max-width: 600px) {
   .navbar .linktext {
-    font-size: 1em;
+    font-size: 0.9em;
+  }
+
+  .logout-btn {
+    font-size: 0.9em;
   }
 }
 
@@ -103,6 +129,7 @@ footer {
   width: 100%;
   margin-top: auto;
 }
+
 .logout-btn {
   background: none;
   border: none;
@@ -111,12 +138,10 @@ footer {
   font-size: 18px;
   margin-top: -13px;
 }
-.logout-btn:hover{
+
+.logout-btn:hover {
   transform: scale(1.2);
   transition: ease-out 0.2s;
-}
-.logout-btn:after {
-  content: attr(data-text);
 }
 
 .welcome .linktext {

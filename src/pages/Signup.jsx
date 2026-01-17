@@ -4,11 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import PageTransition from "../utils/pageTransition";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../store/authSlice";
+import { motion } from "framer-motion";
 
 function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading } = useSelector((state) => state.auth);
+  const { loading, error } = useSelector((state) => state.auth);
 
   const [form, setForm] = useState({
     nom: "",
@@ -23,97 +24,94 @@ function Signup() {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log("Register clicked:", form);
-
     dispatch(register(form))
-    dispatch(register(form))
-  .then(() => {
-    console.log("Register success");
-    navigate("/signIn");
-  })
-  .catch((err) => {
-    console.log("Register failed", err);
-  });
-
+      .then((res) => {
+        if (!res.error) {
+          navigate("/signIn");
+        }
+      });
   };
 
   return (
     <PageTransition>
-      <form onSubmit={handleRegister} className="auth-page">
+      <div className="auth-page">
+        <motion.div
+          className="auth-card"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.4 }}
+        >
+          <h2>Créer un compte</h2>
+          <p className="auth-subtitle">
+            Rejoignez la communauté E-gestion dès aujourd'hui !
+          </p>
 
-        <div className="auth-card">
-  <h2>Inscription</h2>
-  <p className="auth-subtitle">
-    Remplissez vos informations pour créer un compte
-  </p>
+          <form onSubmit={handleRegister}>
+            <label>Nom Complet</label>
+            <div className="auth-input-group">
+              <span className="auth-icon">👤</span>
+              <input
+                type="text"
+                name="nom"
+                value={form.nom}
+                onChange={handleChange}
+                placeholder="Votre nom complet"
+                required
+              />
+            </div>
 
-  <label>Nom Complet :</label>
-  <div className="auth-input-group">
-    <span className="auth-icon">👤</span>
-    <input
-      type="text"
-      name="nom"
-      value={form.nom}
-      onChange={handleChange}
-      placeholder="votre nom complet ici"
-      required
-    />
-  </div>
+            <label>Nom d'utilisateur</label>
+            <div className="auth-input-group">
+              <span className="auth-icon">🌐</span>
+              <input
+                type="text"
+                name="username"
+                value={form.username}
+                onChange={handleChange}
+                placeholder="Choisissez un pseudo"
+                required
+              />
+            </div>
 
-  <label>Username :</label>
-  <div className="auth-input-group">
-    <span className="auth-icon">🌐</span>
-    <input
-      type="text"
-      name="username"
-      value={form.username}
-      onChange={handleChange}
-      placeholder="choisir votre username"
-      required
-    />
-  </div>
+            <label>Email</label>
+            <div className="auth-input-group">
+              <span className="auth-icon">📧</span>
+              <input
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                placeholder="votre@email.com"
+                required
+              />
+            </div>
 
-  <label>Email :</label>
-  <div className="auth-input-group">
-    <span className="auth-icon">📧</span>
-    <input
-      type="email"
-      name="email"
-      value={form.email}
-      onChange={handleChange}
-      placeholder="entrer votre email"
-      required
-    />
-  </div>
+            <label>Mot de passe</label>
+            <div className="auth-input-group">
+              <span className="auth-icon">🔒</span>
+              <input
+                type="password"
+                name="motdepasse"
+                value={form.motdepasse}
+                onChange={handleChange}
+                placeholder="Mot de passe sécurisé"
+                required
+              />
+            </div>
 
-  <label>Mot de passe :</label>
-  <div className="auth-input-group">
-    <span className="auth-icon">🔒</span>
-    <input
-      type="password"
-      name="motdepasse"
-      value={form.motdepasse}
-      onChange={handleChange}
-      placeholder="*************************"
-      required
-    />
-  </div>
+            <button className="auth-btn" type="submit" disabled={loading}>
+              {loading ? "Création du compte..." : "S'inscrire"}
+            </button>
+          </form>
 
-  <button className="auth-btn" type="submit" disabled={loading}>
-    {loading ? "Création..." : "S'inscrire"}
-  </button>
+          <hr />
 
-  <hr />
-
-  <div className="auth-footer">
-    <p>Vous avez déjà un compte ?</p>
-    <Link to="/signIn" style={{ color: "green" }}>
-      Connectez-vous ici
-    </Link>
-  </div>
-</div>
-
-      </form>
+          <div className="auth-footer">
+            <span>Vous avez déjà un compte ?</span>
+            <Link to="/signIn">Connectez-vous</Link>
+          </div>
+        </motion.div>
+      </div>
     </PageTransition>
   );
 }

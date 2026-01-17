@@ -1,313 +1,470 @@
+/* GLOBAL PROFILE BACKGROUND */
 .profile-container {
-  background: #83b7b7;
-  min-height: 100vh;
-  padding: 40px;
+  min-height: calc(100vh - 100px);
+  padding: 40px 10%;
+  background: linear-gradient(135deg, #132e2e 0%, #2f8f8f 100%);
+  color: white;
+  position: relative;
+  /* overflow-x: hidden; */
 }
 
-.profile-container h2 {
-  color: #0f2f2f;
-  margin-bottom: 25px;
+.profile-container h1 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: white;
 }
 
-/* CARD */
+/* GLASS CARDS SHARED STYLE */
+.profile-card,
+.profile-section,
+.modal {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+/* MAIN PROFILE HEADER CARD */
 .profile-card {
-  background: #9ccccc;
-  border-radius: 20px;
-  padding: 25px;
+  padding: 40px;
   display: flex;
-  gap: 30px;
+  gap: 40px;
   position: relative;
   max-width: 900px;
-  margin: auto;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-}
-
-.edit-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: #255555;
-  color: white;
-  border: none;
-  border-radius: 50px;
-  width: fit-content;
-  height: fit-content;
-  font-size: 15px;
-  cursor: pointer;
-  transition: 0.3s;
-  padding: 20px;
-}
-
-.edit-btn:hover {
-  transform: scale(1.04);
-  background: #1c4444;
-}
-
-.profile-left {
-  display: flex;
+  margin: 0 auto 50px;
   align-items: center;
-  justify-content: center;
+}
+
+/* Left side - Avatar */
+.profile-left {
+  flex-shrink: 0;
 }
 
 .profile-img {
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
-  background: #255555;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
   padding: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.profile-right h3 {
-  margin: 0;
-  color: #0f2f2f;
+.profile-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #1a3c3c;
+  /* Match dark bg */
 }
 
-.username {
-  color: #1e5e5e;
+/* Right side - Info */
+.profile-right {
+  flex-grow: 1;
+}
+
+.profile-right h2 {
+  margin: 0 0 15px;
+  font-size: 2rem;
+  background: linear-gradient(90deg, #fff, #a2dede);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .row {
   display: flex;
-  gap: 10px;
-  margin: 8px 0;
-  color: #0f2f2f;
+  gap: 15px;
+  margin: 10px 0;
+  font-size: 1.05rem;
+  align-items: center;
 }
 
-/* MODAL */
+.row strong {
+  color: rgba(255, 255, 255, 0.6);
+  min-width: 100px;
+}
+
+.username {
+  color: #4facfe;
+  font-weight: 600;
+}
+
+/* Edit Button */
+.edit-btn {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.edit-btn:hover {
+  background: white;
+  color: #132e2e;
+  transform: translateY(-2px);
+}
+
+/* SECTIONS */
+.profile-section {
+  padding: 30px;
+  margin: 30px auto;
+  max-width: 900px;
+}
+
+.profile-section h3 {
+  color: #fff;
+  margin-bottom: 25px;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.events-grid-small {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  padding-bottom: 20px;
+}
+
+.profile-section h3::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 24px;
+  background: #4facfe;
+  border-radius: 4px;
+}
+
+/* EVENT ITEMS */
+.event-item {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 15px;
+  transition: 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.event-item:hover {
+  transform: translateY(-3px);
+  background: rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.event-item.past {
+  opacity: 0.6;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.event-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.event-info span {
+  background: rgba(79, 172, 254, 0.15);
+  color: #89cff0;
+  padding: 4px 12px;
+}
+
+/* FORMS & MODALS */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 99999;
+  backdrop-filter: blur(8px);
 }
 
 .modal {
-  background: #9ccccc;
-  border-radius: 15px;
-  padding: 25px;
-  width: 350px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  background: #132e2e;
+  /* Darker solid background for better contrast */
+  color: white;
+  width: 100%;
+  max-width: 500px;
+  /* Slightly wider */
+  margin: 20px;
+  position: relative;
+  padding: 30px;
+  /* Added explicit padding */
+  /* Reset any margins that might push it down */
+  top: auto;
+  left: auto;
+  transform: none;
+  z-index: 100000;
 }
 
 .modal h3 {
-  color: #0f2f2f;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.modal .form-group {
   margin-bottom: 15px;
 }
 
 .modal label {
-  font-weight: bold;
-  color: #0f2f2f;
-  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
-.modal input {
-  width: 100%;
-  padding: 8px;
-  border-radius: 8px;
-  border: none;
-  margin: 5px 0 12px;
-  background: #bfe3e3;
-}
+.modal input,
 .modal textarea {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   border-radius: 8px;
-  border: none;
-  margin: 5px 0 12px;
-  background: #bfe3e3;
+  font-size: 1rem;
 }
+
+.modal input:focus,
+.modal textarea:focus {
+  border-color: #4facfe;
+  background: rgba(0, 0, 0, 0.3);
+  outline: none;
+}
+
 .modal-actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 25px;
 }
 
+.save,
 .cancel {
-  background: #ccc;
   border: none;
-  padding: 8px 15px;
-  border-radius: 8px;
+  border-radius: 50px;
+  padding: 10px 24px;
+  font-size: 0.95rem;
   cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .save {
-  background: #255555;
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
   color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-/* ================= EVENTS SECTIONS ================= */
-
-.profile-section {
-  background: #9ccccc;
-  border-radius: 20px;
-  padding: 25px;
-  margin: 30px auto;
-  max-width: 900px;
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
 }
 
-.profile-section h3 {
-  color: #0f2f2f;
-  margin-bottom: 20px;
-  font-size: 20px;
-  border-left: 5px solid #255555;
-  padding-left: 10px;
+.save:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 242, 254, 0.4);
 }
 
-/* EVENT ITEM */
-.event-item {
-  background: #bfe3e3;
-  border-radius: 15px;
-  padding: 15px 20px;
-  margin-bottom: 15px;
-  transition: 0.25s ease;
-  box-shadow: inset 0 0 0 1px rgba(37, 85, 85, 0.3);
+.cancel {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.event-item:hover {
-  transform: scale(1.01);
-  background: #d3f0f0;
+.cancel:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
 }
 
-/* PAST EVENT LOOK */
-.event-item.past {
-  background: #a8cfcf;
-  opacity: 0.7;
-}
-
-/* EVENT NAME */
-.event-name {
-  font-size: 18px;
-  font-weight: bold;
-  color: #0f2f2f;
-  margin-bottom: 6px;
-}
-
-/* EVENT INFO LINE */
-.event-info {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  font-size: 14px;
-  color: #1e5e5e;
-}
-
-.event-info span {
-  background: rgba(37, 85, 85, 0.15);
-  padding: 4px 10px;
-  border-radius: 20px;
-}
-
-/* EMPTY TEXT */
-.profile-section p {
-  color: #1e5e5e;
-  font-style: italic;
-}
-
-/* ================= ORGANIZER REQUEST FORM ================= */
-
+/* ORGANIZER FORM */
+/* ORGANIZER FORM */
 .organizer-form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 15px;
 }
 
 .organizer-form textarea {
-  resize: none;
-  min-height: 90px;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  min-height: 120px;
+  padding: 15px;
   border-radius: 12px;
-  border: none;
-  padding: 12px;
-  background: #bfe3e3;
-  color: #0f2f2f;
-  font-size: 14px;
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+  transition: all 0.3s ease;
 }
 
-.organizer-form textarea::placeholder {
-  color: #4f8f8f;
+.organizer-form textarea:focus {
+  outline: none;
+  border-color: #4facfe;
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .organizer-form button {
-  align-self: flex-start;
-  background: #255555;
-  color: white;
+  align-self: flex-end;
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+  padding: 12px 30px;
+  font-weight: bold;
   border: none;
-  border-radius: 25px;
-  padding: 10px 22px;
+  border-radius: 50px;
+  color: white;
   cursor: pointer;
-  font-size: 14px;
-  transition: 0.25s ease;
+  transition: transform 0.2s;
 }
 
 .organizer-form button:hover {
-  background: #1c4444;
-  transform: scale(1.05);
-}
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  transform: translateY(-2px);
 }
 
-.add-event-btn {
-  background: #255555;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 6px 14px;
-  cursor: pointer;
-  transition: 0.2s;
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 20px 5%;
+  }
+
+  .profile-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px;
+    gap: 20px;
+  }
+
+  .profile-right h2 {
+    font-size: 1.6rem;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 5px;
+    font-size: 1rem;
+  }
+
+  .row strong {
+    color: rgba(255, 255, 255, 0.8);
+    /* Lighter for readability on stacked */
+  }
+
+  .edit-btn {
+    top: 15px;
+    right: 15px;
+  }
+
+  .events-grid-small {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Modal Mobile Fix */
+  .modal {
+    width: 90%;
+    margin: 10px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 20px;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+    /* Stack buttons, cancel at bottom */
+  }
+
+  .save,
+  .cancel {
+    width: 100%;
+  }
 }
 
-.add-event-btn:hover {
-  background: #1c4444;
-  transform: scale(1.05);
-}
-
-.event-item.organizer {
-  background: #bfe3e3;
-  position: relative;
-}
-
+/* ACTION BUTTONS */
 .event-actions {
-  margin-top: 10px;
+  margin-top: 15px;
   display: flex;
-  gap: 10px;
+  gap: 12px;
+  flex-wrap: wrap;
+  /* Allow wrapping */
+}
+
+@media (max-width: 600px) {
+  .event-actions {
+    flex-direction: column;
+  }
+
+  .event-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.edit-btn-sm,
+.delete-btn-sm,
+.add-event-btn {
+  border: none;
+  border-radius: 50px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .edit-btn-sm {
-  background: #2f8f8f;
-  color: white;
-  border: none;
-  padding: 5px 12px;
-  border-radius: 15px;
-  cursor: pointer;
-}
-
-.delete-btn-sm {
-  background: #a33;
-  color: white;
-  border: none;
-  padding: 5px 12px;
-  border-radius: 15px;
-  cursor: pointer;
+  background: rgba(79, 172, 254, 0.2);
+  color: #4facfe;
+  border: 1px solid rgba(79, 172, 254, 0.3);
 }
 
 .edit-btn-sm:hover {
-  background: #246f6f;
+  background: #4facfe;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(79, 172, 254, 0.3);
+}
+
+.delete-btn-sm {
+  background: rgba(231, 76, 60, 0.2);
+  color: #ff6b6b;
+  border: 1px solid rgba(231, 76, 60, 0.3);
 }
 
 .delete-btn-sm:hover {
-  background: #822;
+  background: #ff6b6b;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+.add-event-btn {
+  background: #4facfe;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.add-event-btn:hover {
+  background: white;
+  color: #132e2e;
+  transform: scale(1.05);
 }

@@ -1,125 +1,181 @@
-import React from "react";
+import React, { useState } from "react";
 import PageTransition from "../utils/pageTransition";
+import { motion } from "framer-motion";
 import "../styles/contact.css";
+import { useToast } from "../context/ToastContext";
+import { API } from "../utils/constants";
 
 function Contact() {
+  const { addToast } = useToast();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: ""
+  });
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    // Import moved to top
+
+    // ...
+    try {
+      const response = await fetch(`${API}/contact.php`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+
+      if (data.success) {
+        addToast("Message envoyé avec succès ! 🚀", "success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        addToast(data.error || "Erreur lors de l'envoi", "error");
+      }
+    } catch (error) {
+      addToast("Erreur de connexion au serveur", "error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <PageTransition>
-      <div>
-        <div className="contact1">
-          <h1>Contactez-nous</h1>
-          <p>
-            Vous avez une question, une suggestion ou vous avez rencontré un
-            problème ? N'hésitez pas à nous contacter. Notre équipe est là pour
-            vous aider
-          </p>
+      <div className="contact-container">
+
+        {/* HEADER */}
+        <div className="contact-header">
+          <motion.h1
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            Contactez-nous
+          </motion.h1>
+          <motion.p
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+          >
+            Une question, un projet ? Nous sommes là pour vous aider.
+          </motion.p>
         </div>
-        <div className="contact2">
-          <div style={{ width: "60%" }}>
-            <article className="info1">
-              <h2>Informations de Contact</h2>
-              <div style={{ display: "flex" }} className="info">
-                <span className="logo">
-                  <img src="mail_1324171.png" alt="" width={40} height={40} />
-                </span>
-                <span className="infoText">
-                  <h4>Email</h4>
-                  <p>rouibaa.khalid05@gmail.com</p>
-                </span>
+
+        <div className="contact-content">
+
+          {/* INFO SIDE */}
+          <motion.div
+            className="contact-info-card"
+            initial={{ x: -30, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            <h2>Informations</h2>
+
+            <div className="info-item">
+              <div className="icon-box">📧</div>
+              <div>
+                <h4>Email</h4>
+                <p>support@egestion.com</p>
               </div>
-              <div style={{ display: "flex" }} className="info">
-                <span className="logo">
-                  <img
-                    src="phone-call_3779208.png"
-                    alt=""
-                    width={40}
-                    height={40}
-                  />
-                </span>
-                <span className="infoText">
-                  <h4>Téléphone</h4>
-                  <p>+212690840304</p>
-                </span>
+            </div>
+
+            <div className="info-item">
+              <div className="icon-box">📞</div>
+              <div>
+                <h4>Téléphone</h4>
+                <p>+212 6 00 00 00 00</p>
               </div>
-              <div style={{ display: "flex" }} className="info">
-                <span className="logo">
-                  <img src="next_15553801.png" alt="" width={40} height={40} />
-                </span>
-                <span className="infoText">
-                  <h4>Horaires d'ouverture</h4>
-                  <p>
-                    Lundi - Vendredi: 9h00 - 18h00 <br />
-                    Samedi: 10h00 - 14h00 <br />
-                    Dimanche: Fermé
-                  </p>
-                </span>
+            </div>
+
+            <div className="info-item">
+              <div className="icon-box">📍</div>
+              <div>
+                <h4>Adresse</h4>
+                <p>Technopark, Rabat, Maroc</p>
               </div>
-            </article>
-            <article className="info2">
-              <h2>Temps de réponse</h2>
-              <p style={{ color: "rgb(100,100,100)", fontSize: "17px" }}>
-                Nous nous efforçons de répondre à tous les messages dans un
-                délai de 24 à 48 heures ouvrables. Pour les urgences, veuillez
-                nous appeler directement.
-              </p>
-            </article>
-          </div>
-          <div className="sendinfo">
+            </div>
+
+            <div className="info-item">
+              <div className="icon-box">🕒</div>
+              <div>
+                <h4>Horaires</h4>
+                <p>Lun - Ven: 9h - 18h</p>
+              </div>
+            </div>
+
+          </motion.div>
+
+          {/* FORM SIDE */}
+          <motion.div
+            className="contact-form-card"
+            initial={{ x: 30, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
             <h2>Envoyez-nous un message</h2>
-            <form>
-              <h4>Nom complet</h4>
-              <input type="text" placeholder="Votre nom" id="" />
-              <h4>Email</h4>
-              <input type="email" placeholder="votre.email@exemple.com" id="" />
-              <h4>Sujet</h4>
-              <input type="text" placeholder="De quoi il s'agit-il?" id="" />
-              <h4>Message</h4>
-              <textarea placeholder="Décriver votre question ou probléme en détail..."></textarea>
-              <button>
-                <img
-                  src="direct_1004013.png"
-                  alt=""
-                  width={20}
-                  height={20}
-                  style={{ marginTop: "12px", marginRight: "10px" }}
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label>Nom complet</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  placeholder="Votre nom"
                 />
-                <p>Envoyer le message</p>
+              </div>
+
+              <div className="form-group">
+                <label>Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="votre@email.com"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Sujet</label>
+                <input
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="Sujet de votre message"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Message</label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  placeholder="Ecrivez votre message ici..."
+                  rows="5"
+                ></textarea>
+              </div>
+
+              <button type="submit" className="submit-btn" disabled={loading}>
+                {loading ? "Envoi en cours..." : "Envoyer le message ✉️"}
               </button>
             </form>
-          </div>
-        </div>
-        <div className="contact3">
-          <h2>Questions Fréquentes</h2>
-          <div className="questions">
-            <span>
-              <h3>Comment créer un événement ?</h3>
-              <p>
-                Connectez-vous avec un compte administrateur pour accéder au
-                tableau de bord et créer des événements.
-              </p>
-            </span>
-            <span>
-              <h3>Puis-je annuler ma participation ?</h3>
-              <p>
-                Oui, vous pouvez annuler votre participation à tout moment
-                depuis la page de détails de l'événement.
-              </p>
-            </span>
-            <span>
-              <h3>Comment s'inscrire à un événement ?</h3>
-              <p>
-                Créez un compte, parcourez les événements et cliquez sur
-                "Participer" sur la page de détails de l'événement.
-              </p>
-            </span>
-            <span>
-              <h3>Signaler un problème technique</h3>
-              <p>
-                Utilisez le formulaire ci-dessus avec le sujet "Problème
-                Technique" pour nous signaler tout bug ou erreur.
-              </p>
-            </span>
-          </div>
+          </motion.div>
+
         </div>
       </div>
     </PageTransition>

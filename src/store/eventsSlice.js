@@ -1,48 +1,68 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
-  getEventsForUser,
+  getAllEvents,
   getMyOrganizerEvents,
-  getAllEventsAdmin,
   createEvent,
-  deleteEvent
+  deleteEvent,
+  updateEvent
 } from "../api/eventsApi";
 
-/* Fetch events for normal user */
+/* Fetch events */
 export const fetchEvents = createAsyncThunk(
   "events/fetch",
-  async ({ role, userId }) => {
-    if (role === "admin") return await getAllEventsAdmin();
-    if (role === "organizer") return await getMyOrganizerEvents(userId);
-    return await getEventsForUser();
+  async () => {
+    return await getAllEvents();
   }
 );
 
 export const addEvent = createAsyncThunk(
   "events/add",
-  async ({ event, user }) => await createEvent(event, user)
+  async ({ event, user }) => {
+    const res = await createEvent(event, user);
+    return res;
+  }
+);
+
+export const editEvent = createAsyncThunk(
+  "events/edit",
+  async ({ id, event }) => {
+    const res = await updateEvent(id, event);
+    return { ...event, idE: id };
+  }
 );
 
 export const removeEvent = createAsyncThunk(
   "events/remove",
-  async (eventId) => await deleteEvent(eventId)
+  async (eventId) => {
+    await deleteEvent(eventId);
+    return eventId;
+  }
 );
 
 const eventsSlice = createSlice({
   name: "events",
   initialState: {
-    events: []
+    events: [],
+    loading: false
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(fetchEvents.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(fetchEvents.fulfilled, (state, action) => {
+        state.loading = false;
         state.events = action.payload;
       })
+      .addCase(fetchEvents.rejected, (state) => {
+        state.loading = false;
+      })
       .addCase(addEvent.fulfilled, (state, action) => {
-        state.events.push(action.payload);
+        state.events.unshift(action.payload);
       })
       .addCase(removeEvent.fulfilled, (state, action) => {
-        state.events = state.events.filter(e => e.idE !== action.meta.arg);
+        state.events = state.events.filter(e => e.idE !== action.payload);
       });
   }
 });

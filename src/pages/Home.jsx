@@ -1,111 +1,177 @@
 import React from "react";
 import PageTransition from "../utils/pageTransition";
 import "../styles/home.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { API } from "../utils/constants";
 
 function Home() {
   const navigate = useNavigate();
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+
+  const [stats, setStats] = React.useState({
+    events: 0,
+    users: 0,
+    categories: 0, // We might not have categories in DB yet, kept as 0 or remove
+    satisfaction: 100
+  });
+
+  React.useEffect(() => {
+    // Import moved to top
+
+    // ... inside component
+    fetch(`${API}/stats.php`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          setStats(data.stats);
+        }
+      })
+      .catch(err => console.error("Error fetching stats:", err));
+  }, []);
+
   const numberlist = [
-    { id: 1, num: "237", description: "Total des événements" },
-    { id: 2, num: "168", description: "Utilisateur actif" },
-    { id: 3, num: "29", description: "Cours via notre site Internet" },
-    { id: 4, num: "95%", description: "Satisfaction totale des utilisateurs" },
+    { id: 1, num: stats.events, description: "Événements créés", suffix: "" },
+    { id: 2, num: stats.users, description: "Utilisateurs inscrits", suffix: "" },
+    { id: 3, num: stats.participations, description: "Participations confirmées", suffix: "+" },
+    { id: 4, num: stats.satisfaction, description: "Satisfaction moyenne", suffix: "%" },
   ];
+
   const introliste = [
-    { id: 1,
-      title: "Découverte facile d'événements",
-      description:
-        " Parcourez des milliers d'événements adaptés à vos centres d'intérêt et à votre localisation. Trouvez exactement ce que vous cherchez.",
-      pic: "party_2982898.png",
+    {
+      id: 1,
+      title: "Découverte facile",
+      description: "Des milliers d'événements adaptés à vos goûts et localisation.",
+      icon: "🔍",
     },
-    { id: 2,
-      title: "Entrez en contact avec des personnes.",
-      description:
-        " Rencontrez des personnes partageant les mêmes idées, élargissez votre réseau et tissez des liens durables lors d'événements.",
-      pic: "group_18992261.png",
+    {
+      id: 2,
+      title: "Réseautage",
+      description: "Rencontrez des passionnés et élargissez votre réseau pro.",
+      icon: "🤝",
     },
-    { id: 3,
-      title: "Inscription simple",
-      description:
-        " Inscrivez-vous aux événements en un seul clic. Suivez votre participation et gérez votre emploi du temps sans effort.",
-      pic: "right_10025599.png",
+    {
+      id: 3,
+      title: "Inscription rapide",
+      description: "Réservez votre place en un clic et gérez votre agenda.",
+      icon: "⚡",
     },
-    { id: 4,
+    {
+      id: 4,
       title: "Portée mondiale",
-      description:
-        "Accédez à des événements du monde entier ou concentrez-vous sur votre communauté locale. Options virtuelles et en présentiel disponibles.",
-      pic: "placeholder_819865.png",
+      description: "Accédez à des événements locaux et internationaux.",
+      icon: "🌍",
     },
-    { id: 5,
-      title: "Notifications intelligentes",
-      description:
-        "Ne manquez plus aucun événement ! Recevez des rappels et des mises à jour en temps opportun sur les événements qui vous intéressent.",
-      pic: "active_1827392.png",
+    {
+      id: 5,
+      title: "Rappels Intelligents",
+      description: "Ne manquez jamais un événement grâce aux notifications.",
+      icon: "🔔",
     },
-    { id: 6,
-      title: "Trending Events",
-      description:
-        " Restez informé(e) des événements les plus populaires et les plus en vogue dans votre région et dans le monde entier.",
-      pic: "trend_8944350.png",
-    },];
+    {
+      id: 6,
+      title: "Tendances",
+      description: "Suivez les événements les plus populaires du moment.",
+      icon: "🔥",
+    },
+  ];
+
   return (
     <PageTransition>
-      <div className="container">
-        <div className="intro1">
-          <h1>Découvrez & Participez à des événements exceptionnels</h1>
-          <p>
-            Rencontrez des personnes partageant les mêmes centres d'intérêt,
-            découvrez des événements passionnants et créez des souvenirs
-            inoubliables. Votre prochaine aventure commence ici
-          </p>
-          <button className="btn1-intro1" onClick={() => navigate("/Events")}>
-            Explorer les événements
-          </button>
-          <button className="btn2-intro1" onClick={() => navigate("/signUp")}>
-            Commencez avec nous
-          </button>
-        </div>
-        <div className="intro2">
-          {numberlist.map((numL, index) => {
-            return (
-              <span key={index}>
-                <p className="num">{numL.num}</p>
-                <p className="desc">{numL.description}</p>
-              </span>
-            );
-          })}
+      <div className="home-container">
+        {/* HERO SECTION */}
+        <div className="hero-section">
+          <div className="hero-background"></div>
+          <motion.div
+            className="hero-content"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="hero-title">
+              Vivez des moments <br />
+              <span className="highlight-text">Inoubliables</span>
+            </h1>
+            <p className="hero-subtitle">
+              La plateforme ultime pour créer, découvrir et partager des événements exceptionnels.
+              Rejoignez une communauté passionnée dès aujourd'hui.
+            </p>
+            <div className="hero-buttons">
+              <button className="btn-primary" onClick={() => navigate("/events")}>
+                Explorer les événements
+              </button>
+              <button className="btn-secondary" onClick={() => navigate("/signUp")}>
+                Rejoindre la communauté
+              </button>
+            </div>
+          </motion.div>
         </div>
 
-        <div className="intro3">
-          <h3>Pourquoi choisir E-gestion ?</h3>
-          <p style={{ fontSize: "15px", color: "rgb(100,100,100)" }}>
-            Tout ce dont vous avez besoin pour découvrir, organiser et
-            participer à des événements.
-          </p>
-          <div className="articleContainer">
-            {introliste.map((L , index) => {
-              return (
-                <div className="article" key={index}>
-                  <span className="articleIcon">
-                    <img src={L.pic} alt="img" height={40} width={40}/>
-                  </span>
-                  <h4>{L.title}</h4>
-                  <p style={{ fontSize: "12px" }}>{L.description}</p>
-                </div>
-              );
-            })}
+        {/* STATS SECTION */}
+        <div className="stats-section">
+          {numberlist.map((item, index) => (
+            <motion.div
+              className="stat-card"
+              key={item.id}
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+            >
+              <h2 className="stat-num">{item.num}<span className="stat-suffix">{item.suffix}</span></h2>
+              <p className="stat-desc">{item.description}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* FEATURES SECTION */}
+        <div className="features-section">
+          <motion.div
+            className="section-header"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h3>Pourquoi choisir E-Gestion ?</h3>
+            <p>Une suite complète d'outils pour vos événements.</p>
+          </motion.div>
+
+          <div className="features-grid">
+            {introliste.map((item, index) => (
+              <motion.div
+                className="feature-card"
+                key={item.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -5, boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}
+              >
+                <div className="feature-icon">{item.icon}</div>
+                <h4>{item.title}</h4>
+                <p>{item.description}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
-        <div className="intro4">
-          <h3>Prêt à commencer ?</h3>
-          <p style={{ fontSize: "15px", color: "rgb(100,100,100)" }}>
-            Rejoignez les milliers d'utilisateurs qui découvrent et participent déjà chaque jour à des événements exceptionnels.
-          </p>
-          <button onClick={()=>navigate("/signUp")}>Créez votre compte</button>
+
+        {/* CTA SECTION */}
+        <div className="cta-section">
+          <motion.div
+            className="cta-content"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+          >
+            <h3>Prêt à lancer votre prochain événement ?</h3>
+            <p>Rejoignez des milliers d'organisateurs qui nous font confiance.</p>
+            <button className="btn-cta" onClick={() => navigate("/signUp")}>Créer un compte gratuitement</button>
+          </motion.div>
         </div>
       </div>
     </PageTransition>
   );
-} 
+}
 
 export default Home;
