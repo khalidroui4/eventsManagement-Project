@@ -16,8 +16,10 @@ if ($method === "GET") {
         $stmt = $pdo->prepare("
             SELECT 
                 e.*,
+                COALESCE(Moyenne_ev(e.idE), 0) AS moyenne,
                 u.username AS organizer_name,
-                u.full_name AS organizer_fullname
+                u.full_name AS organizer_fullname,
+                u.profile_image AS organizer_image
             FROM evenement e
             LEFT JOIN utilisateur u ON e.creator_id = u.idU
             WHERE e.idE = ?
@@ -34,8 +36,10 @@ if ($method === "GET") {
         $stmt = $pdo->prepare("
             SELECT 
                 e.*,
+                COALESCE(Moyenne_ev(e.idE), 0) AS moyenne,
                 u.username AS organizer_name,
-                u.full_name AS organizer_fullname
+                u.full_name AS organizer_fullname,
+                u.profile_image AS organizer_image
             FROM evenement e
             LEFT JOIN utilisateur u ON e.creator_id = u.idU
             WHERE e.creator_id = ?
@@ -49,8 +53,10 @@ if ($method === "GET") {
     $stmt = $pdo->query("
         SELECT 
             e.*,
+            COALESCE(Moyenne_ev(e.idE), 0) AS moyenne,
             u.username AS organizer_name,
-            u.full_name AS organizer_fullname
+            u.full_name AS organizer_fullname,
+            u.profile_image AS organizer_image
         FROM evenement e
         LEFT JOIN utilisateur u ON e.creator_id = u.idU
     ");
@@ -67,14 +73,29 @@ if ($method === "POST" && isset($_GET["action"]) && $_GET["action"] === "update"
     $data = json_decode(file_get_contents("php://input"), true);
     $id = (int) $_GET["id"];
 
+    // SECURITY: Auth & Ownership Check
+    if (!isset($_SESSION['user_id'])) {
+        echo json_encode(["success" => false, "error" => "Unauthorized"]);
+        exit;
+    }
+
+    $check = $pdo->prepare("SELECT creator_id FROM evenement WHERE idE = ?");
+    $check->execute([$id]);
+    $ev = $check->fetch(PDO::FETCH_ASSOC);
+
+    if (!$ev || $ev['creator_id'] != $_SESSION['user_id']) {
+        echo json_encode(["success" => false, "error" => "Forbidden: You do not own this event"]);
+        exit;
+    }
+
     try {
         $stmt = $pdo->prepare("
             UPDATE evenement SET
-                event_name = ?,
-                capaciteE = ?,
-                dateE = ?,
-                placeE = ?,
-                descriptionE = ?
+            event_name = ?,
+            capaciteE = ?,
+            dateE = ?,
+            placeE = ?,
+            descriptionE = ?
             WHERE idE = ?
         ");
 
@@ -107,6 +128,21 @@ if ($method === "POST" && isset($_GET["action"]) && $_GET["action"] === "delete"
     }
 
     $id = (int) $data["id"];
+
+    // SECURITY: Auth & Ownership Check
+    if (!isset($_SESSION['user_id'])) {
+        echo json_encode(["success" => false, "error" => "Unauthorized"]);
+        exit;
+    }
+
+    $check = $pdo->prepare("SELECT creator_id FROM evenement WHERE idE = ?");
+    $check->execute([$id]);
+    $ev = $check->fetch(PDO::FETCH_ASSOC);
+
+    if (!$ev || $ev['creator_id'] != $_SESSION['user_id']) {
+        echo json_encode(["success" => false, "error" => "Forbidden: You do not own this event"]);
+        exit;
+    }
 
     try {
         $pdo->beginTransaction();
@@ -155,7 +191,7 @@ if ($method === "POST") {
             $data["event_name"],
             $data["dateE"],
             $data["capaciteE"],
-            $data["creator_id"],
+            $_SESSION['user_id'] ?? 0, // Force Session ID
             $data["placeE"] ?? "",
             $data["descriptionE"] ?? ""
         ]);
@@ -168,3 +204,4 @@ if ($method === "POST") {
 }
 
 echo json_encode(["success" => false, "error" => "Invalid request"]);
+?>

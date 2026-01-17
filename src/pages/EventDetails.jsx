@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchParticipations } from "../store/profileSlice";
 import { addEvaluation, getEvaluationsByEvent } from "../api/evaluationsApi";
@@ -131,7 +131,24 @@ export default function EventDetails() {
               )}
             </div>
             <h1 className="event-title">{event.event_name}</h1>
-            <p className="event-organizer">Organisé par <strong>{event.organizer_name}</strong></p>
+
+            <div className="event-organizer-badge-container">
+              <span style={{ opacity: 0.8, marginRight: '10px' }}>Organisé par</span>
+              <Link to={`/user/${event.creator_id}`} className="organizer-badge">
+                {event.organizer_image ? (
+                  <img
+                    src={`http://localhost/project_backend/${event.organizer_image}`}
+                    alt={event.organizer_name}
+                    className="organizer-badge-img"
+                  />
+                ) : (
+                  <div className="organizer-badge-placeholder">
+                    {event.organizer_name ? event.organizer_name[0].toUpperCase() : '?'}
+                  </div>
+                )}
+                <span className="organizer-badge-name">@{event.organizer_name}</span>
+              </Link>
+            </div>
           </div>
 
           {/* MAIN CONTENT */}
@@ -142,7 +159,9 @@ export default function EventDetails() {
               <h3>Détails de l'événement</h3>
 
               <div className="info-group">
-                <div className="info-icon">📅</div>
+                <div className="info-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                </div>
                 <div className="info-text">
                   <h4>Date & Heure</h4>
                   <p>{new Date(event.dateE).toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
@@ -150,16 +169,31 @@ export default function EventDetails() {
               </div>
 
               <div className="info-group">
-                <div className="info-icon">📍</div>
+                <div className="info-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </div>
                 <div className="info-text">
                   <h4>Lieu</h4>
                   <p>{event.placeE || "Lieu non spécifié"}</p>
                 </div>
               </div>
 
+
               <div className="description-box">
                 {event.descriptionE || "Aucune description disponible pour cet événement."}
               </div>
+
+              {Number(event.moyenne) > 0 && (
+                <div className="info-group" style={{ marginTop: '20px' }}>
+                  <div className="info-icon" style={{ color: '#f4c430', borderColor: '#f4c430', background: 'rgba(244, 196, 48, 0.1)' }}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                  </div>
+                  <div className="info-text">
+                    <h4>Note moyenne</h4>
+                    <p style={{ fontSize: '1.2rem', color: '#f4c430' }}>{parseFloat(event.moyenne).toFixed(1)} / 5.0</p>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* RIGHT: ACTIONS & SIDEBAR */}
@@ -206,18 +240,18 @@ export default function EventDetails() {
             {/* FORM */}
             {isParticipating && !hasEvaluated && (
               <div className="review-input-box">
-                <h3>Voter expérience compte 💬</h3>
+                <h3>Voter expérience compte <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></h3>
                 <form onSubmit={submitEvaluation}>
                   <div className="rating-select">
                     {[1, 2, 3, 4, 5].map((s) => (
                       <span
                         key={s}
-                        style={{ cursor: "pointer", color: (hoverNote || note) >= s ? "#f4c430" : "#ddd", transition: '0.2s' }}
+                        style={{ cursor: "pointer", color: (hoverNote || note) >= s ? "#f4c430" : "#ddd", transition: '0.2s', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
                         onClick={() => setNote(s)}
                         onMouseEnter={() => setHoverNote(s)}
                         onMouseLeave={() => setHoverNote(0)}
                       >
-                        ★
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                       </span>
                     ))}
                   </div>
@@ -243,22 +277,32 @@ export default function EventDetails() {
                 evaluations.map((e) => (
                   <div key={e.ide} className="review-card">
                     {e.profile_image ? (
-                      <img
-                        src={`http://localhost/project_backend/${e.profile_image}`}
-                        alt={e.username}
-                        className="avatar-placeholder" // Keep same class for size/shape
-                        style={{ objectFit: 'cover', padding: 0, border: 'none' }}
-                      />
+                      <Link to={`/user/${e.user_id}`}>
+                        <img
+                          src={`http://localhost/project_backend/${e.profile_image}`}
+                          alt={e.username}
+                          className="avatar-placeholder"
+                          style={{ objectFit: 'cover', padding: 0, border: 'none', cursor: 'pointer' }}
+                        />
+                      </Link>
                     ) : (
-                      <div className="avatar-placeholder">
-                        {e.username[0].toUpperCase()}
-                      </div>
+                      <Link to={`/user/${e.user_id}`} style={{ textDecoration: 'none' }}>
+                        <div className="avatar-placeholder" style={{ cursor: 'pointer' }}>
+                          {e.username[0].toUpperCase()}
+                        </div>
+                      </Link>
                     )}
                     <div className="review-content">
-                      <strong>{e.username}</strong>
+                      <Link to={`/user/${e.user_id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <strong>{e.username}</strong>
+                      </Link>
                       <span className="review-date">{new Date(e.date_eval).toLocaleDateString()}</span>
                       <div className="review-stars">
-                        {'★'.repeat(e.note)}{'☆'.repeat(5 - e.note)}
+                        {[...Array(5)].map((_, i) => (
+                          <span key={i} style={{ color: i < e.note ? '#f4c430' : '#ddd', marginRight: '2px' }}>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                          </span>
+                        ))}
                       </div>
                       <p className="review-text">{e.comments}</p>
                     </div>
@@ -270,6 +314,6 @@ export default function EventDetails() {
 
         </div>
       </div>
-    </PageTransition>
+    </PageTransition >
   );
 }

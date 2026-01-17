@@ -1,0 +1,59 @@
+/* NOT FOUND PAGE */
+.not-found-container {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background: radial-gradient(circle at center, rgba(37, 85, 85, 0.4) 0%, rgba(10, 25, 25, 0) 70%);
+}
+
+.not-found-title {
+    font-size: 8rem;
+    font-family: 'Righteous', cursive;
+    margin: 0;
+    line-height: 1;
+    background: linear-gradient(135deg, white 30%, var(--pk-gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 2;
+}
+
+.not-found-subtitle {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.not-found-text {
+    color: var(--pk-text-muted);
+    max-width: 500px;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+.btn-home {
+    background: var(--pk-gold);
+    color: var(--pk-primary-dark);
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(244, 196, 48, 0.3);
+}
+
+.btn-home:hover {
+    background: var(--pk-gold-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(244, 196, 48, 0.5);
+}

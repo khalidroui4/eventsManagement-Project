@@ -1,17 +1,17 @@
 /* Main Container */
 .about-container {
   min-height: 100vh;
-  background: #f8f9fa;
-  color: #333;
+  background: var(--pk-bg-gradient);
+  color: var(--pk-text-main);
+  margin-top: 70px;
 }
 
 /* Hero Section */
 .about-hero {
-  background: linear-gradient(135deg, #132e2e 0%, #2f8f8f 100%);
+  background: transparent;
   padding: 100px 20px;
   text-align: center;
   color: white;
-  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
 }
 
 .about-hero h1 {
@@ -20,8 +20,9 @@
   font-weight: 800;
 }
 
+/* Highlight Text in Hero */
 .about-hero .highlight {
-  color: #4facfe;
+  color: var(--pk-accent-light);
 }
 
 .about-hero p {
@@ -29,6 +30,7 @@
   opacity: 0.9;
   max-width: 600px;
   margin: 0 auto;
+  color: var(--pk-text-muted);
 }
 
 /* Mission Section */
@@ -43,23 +45,25 @@
 }
 
 .mission-card {
-  background: white;
+  background: var(--pk-glass-bg);
+  backdrop-filter: blur(12px);
   padding: 40px;
   border-radius: 20px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
   max-width: 400px;
   text-align: center;
   flex: 1;
+  border: 1px solid var(--pk-glass-border);
 }
 
 .mission-card h3 {
   font-size: 1.5rem;
-  color: #132e2e;
+  color: white;
   margin-bottom: 15px;
 }
 
 .mission-card p {
-  color: #666;
+  color: var(--pk-text-muted);
   line-height: 1.6;
 }
 
@@ -67,11 +71,12 @@
 .features-section {
   padding: 80px 20px;
   text-align: center;
+  background: transparent;
 }
 
 .features-section h2 {
   font-size: 2.5rem;
-  color: #132e2e;
+  color: white;
   margin-bottom: 50px;
 }
 
@@ -84,33 +89,34 @@
 }
 
 .feature-box {
-  background: white;
+  background: var(--pk-glass-bg);
   padding: 30px;
   border-radius: 16px;
   transition: transform 0.3s;
-  border: 1px solid #eee;
+  border: 1px solid var(--pk-glass-border);
 }
 
 .feature-box:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  background: rgba(37, 85, 85, 0.6);
 }
 
 .f-icon {
   font-size: 2.5rem;
   margin-bottom: 15px;
+  color: var(--pk-accent);
 }
 
 /* Steps Section */
 .steps-section {
-  background: #e0f7fa;
+  background: rgba(0, 0, 0, 0.2);
   padding: 80px 20px;
 }
 
 .steps-section h2 {
   text-align: center;
   font-size: 2.5rem;
-  color: #132e2e;
+  color: white;
   margin-bottom: 50px;
 }
 
@@ -126,15 +132,16 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  background: white;
+  background: var(--pk-glass-bg);
   padding: 20px;
   border-radius: 12px;
+  border: 1px solid var(--pk-glass-border);
 }
 
 .step-circle {
   width: 50px;
   height: 50px;
-  background: #132e2e;
+  background: var(--pk-primary);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -143,16 +150,18 @@
   font-weight: 800;
   font-size: 1.2rem;
   flex-shrink: 0;
+  border: 1px solid var(--pk-accent);
 }
 
 .step-item h4 {
   margin: 0 0 5px 0;
   font-size: 1.2rem;
+  color: white;
 }
 
 .step-item p {
   margin: 0;
-  color: #666;
+  color: var(--pk-text-muted);
 }
 
 /* CTA */
@@ -164,7 +173,7 @@
 .about-cta h2 {
   font-size: 2rem;
   margin-bottom: 30px;
-  color: #132e2e;
+  color: white;
 }
 
 .cta-btn-group {
@@ -175,8 +184,8 @@
 
 .cta-primary {
   padding: 15px 35px;
-  background: #132e2e;
-  color: white;
+  background: var(--pk-gold);
+  color: var(--pk-primary-dark);
   border: none;
   border-radius: 50px;
   font-weight: bold;
@@ -185,15 +194,16 @@
 }
 
 .cta-primary:hover {
-  background: #1f4646;
+  background: var(--pk-gold-hover);
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(244, 196, 48, 0.3);
 }
 
 .cta-secondary {
   padding: 15px 35px;
-  background: white;
-  color: #132e2e;
-  border: 2px solid #132e2e;
+  background: transparent;
+  color: white;
+  border: 2px solid white;
   border-radius: 50px;
   font-weight: bold;
   cursor: pointer;
@@ -201,8 +211,8 @@
 }
 
 .cta-secondary:hover {
-  background: #132e2e;
-  color: white;
+  background: var(--pk-accent-light);
+  color: var(--pk-primary-dark);
 }
 
 @media (max-width: 768px) {

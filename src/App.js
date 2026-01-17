@@ -12,6 +12,8 @@ import Events from "./pages/Events";
 import Profile from "./pages/Profile";
 import EventDetails from "./pages/EventDetails";
 import ProtectedRoute from "./Components/common/ProtectedRoute";
+import PublicProfile from "./pages/PublicProfile";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const location = useLocation();
@@ -39,6 +41,8 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/user/:id" element={<PublicProfile />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>
 

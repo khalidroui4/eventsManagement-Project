@@ -315,17 +315,7 @@ END$$
 DELIMITER ;
 
 
-CREATE TRIGGER After_evaluation
-AFTER INSERT ON evaluations
-FOR EACH ROW
-BEGIN
-    UPDATE evenement
-    SET descriptionE = CONCAT(
-        COALESCE(descriptionE,''), '\nMoyenne: ',
-        Moyenne_ev(NEW.event_id)
-    )
-    WHERE idE = NEW.event_id;
-END $$
+
 
 
 

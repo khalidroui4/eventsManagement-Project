@@ -2,13 +2,14 @@
 .auth-page {
   min-height: 100vh;
   width: 100%;
-  background: linear-gradient(135deg, #132e2e 0%, #2f8f8f 100%);
+  background: var(--pk-bg-gradient);
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
   position: relative;
   overflow: hidden;
+  margin-top: 70px;
 }
 
 /* Animated Background Circles */
@@ -19,7 +20,7 @@
   width: 400px;
   height: 400px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--pk-glass-bg);
   z-index: 1;
 }
 
@@ -33,13 +34,12 @@
   right: -100px;
 }
 
-
 /* CARD */
 .auth-card {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--pk-glass-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--pk-glass-border);
   padding: 40px;
   border-radius: 24px;
   width: 100%;
@@ -73,7 +73,7 @@
 }
 
 .auth-subtitle {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--pk-text-muted);
   font-size: 0.95rem;
   margin-bottom: 30px;
 }
@@ -92,7 +92,7 @@
 .auth-input-group {
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 12px 16px;
   margin-bottom: 20px;
@@ -101,9 +101,9 @@
 }
 
 .auth-input-group:focus-within {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--pk-accent);
+  box-shadow: 0 0 0 4px rgba(93, 170, 170, 0.1);
 }
 
 .auth-input-group input {
@@ -123,12 +123,13 @@
 .auth-icon {
   font-size: 1.2rem;
   opacity: 0.8;
+  color: var(--pk-accent);
 }
 
 /* BUTTON */
 .auth-btn {
-  background: white;
-  color: #132e2e;
+  background: var(--pk-gold);
+  color: var(--pk-primary-dark);
   border: none;
   border-radius: 12px;
   padding: 14px;
@@ -143,8 +144,9 @@
 
 .auth-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  background: #f0fdfd;
+  box-shadow: 0 8px 25px rgba(244, 196, 48, 0.25);
+  background: var(--pk-gold-hover);
+  color: var(--pk-primary-dark);
 }
 
 .auth-btn:disabled {
@@ -172,7 +174,7 @@
 }
 
 .auth-footer a {
-  color: #4facfe !important;
+  color: var(--pk-accent) !important;
   font-weight: 700;
   text-decoration: none;
   margin-left: 5px;

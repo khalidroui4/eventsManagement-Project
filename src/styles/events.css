@@ -1,12 +1,11 @@
 /* PAGE BACKGROUND */
 .events-container {
   min-height: calc(100vh - 100px);
-  /* Adjust for navbar/footer to preventing forced scroll */
   padding: 40px 10%;
-  background: linear-gradient(135deg, #132e2e 0%, #2f8f8f 100%);
-  color: white;
+  background: var(--pk-bg-gradient);
+  color: var(--pk-text-main);
   position: relative;
-  /* overflow-x: hidden; Removed to prevent layout clipping */
+  margin-top: 100px;
 }
 
 /* Background Decorations */
@@ -17,131 +16,38 @@
   left: -100px;
   width: 600px;
   height: 600px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--pk-glass-bg);
   border-radius: 50%;
   z-index: 0;
   pointer-events: none;
+  filter: blur(80px);
 }
 
 /* ===========================
    EVENT CARD PREMIUM DESIGN
    =========================== */
 .event-card-premium {
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--pk-glass-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--pk-glass-border);
   border-radius: 20px;
-  padding: 25px;
+  padding: 25px 25px 35px 25px;
+  /* Extra bottom padding for progress bar */
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  height: 90%;
-  min-height: 220px;
+  height: 100%;
+  /* Better height behavior */
+  min-height: 280px;
+  /* Taller card */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 
-.event-card-premium:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
-.event-card-premium.clickable:active {
-  transform: scale(0.98);
-}
-
-/* Status Badge */
-.status-badge {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 6px 12px;
-  border-radius: 50px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  z-index: 2;
-}
-
-.status-badge.ouvert {
-  background: rgba(46, 204, 113, 0.2);
-  color: #2ecc71;
-  border: 1px solid rgba(46, 204, 113, 0.3);
-}
-
-.status-badge.complet {
-  background: rgba(231, 76, 60, 0.2);
-  color: #e74c3c;
-  border: 1px solid rgba(231, 76, 60, 0.3);
-}
-
-.status-badge.ferme {
-  background: rgba(149, 165, 166, 0.2);
-  color: #bdc3c7;
-  border: 1px solid rgba(149, 165, 166, 0.3);
-}
-
-/* Header */
-.card-header {
-  margin-bottom: 20px;
-  padding-right: 60px;
-  /* Space for badge */
-}
-
-.card-header h3 {
-  margin: 0 0 5px 0;
-  font-size: 1.4rem;
-  font-weight: 700;
-  line-height: 1.3;
-  color: #ffffff;
-  /* Truncate text */
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  /* Standard property for compatibility */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.organizer-label {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.5);
-  font-style: italic;
-}
-
-/* Body */
-.card-body {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.info-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.info-row .icon {
-  font-size: 1.1rem;
-  opacity: 0.8;
-  width: 20px;
-  text-align: center;
-}
-
-.info-row .text {
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.85);
-}
+/* ... existing hover styles ... */
 
 /* Footer & Stats */
 .card-footer {
@@ -150,7 +56,10 @@
   align-items: center;
   margin-top: auto;
   padding-top: 15px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--pk-glass-border);
+  position: relative;
+  /* Ensure z-index works */
+  z-index: 2;
 }
 
 .participants-badge {
@@ -158,21 +67,21 @@
   align-items: center;
   gap: 6px;
   font-size: 0.9rem;
-  color: #4facfe;
+  color: var(--pk-accent-light);
   font-weight: 600;
-  background: rgba(79, 172, 254, 0.1);
+  background: rgba(37, 85, 85, 0.4);
   padding: 5px 10px;
   border-radius: 8px;
 }
 
 .view-details {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--pk-text-muted);
   transition: 0.3s;
 }
 
 .event-card-premium:hover .view-details {
-  color: white;
+  color: var(--pk-text-main);
   transform: translateX(3px);
 }
 
@@ -183,12 +92,12 @@
   left: 0;
   width: 100%;
   height: 4px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .capacity-fill {
   height: 100%;
-  background: linear-gradient(90deg, #4facfe, #00f2fe);
+  background: var(--pk-btn-gradient);
   transition: width 0.5s ease;
 }
 
@@ -197,7 +106,7 @@
   font-weight: 800;
   margin-bottom: 40px;
   text-align: center;
-  background: linear-gradient(90deg, #fff, #a2dede);
+  background: linear-gradient(90deg, #fff, var(--pk-accent-light));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -210,12 +119,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--pk-glass-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   padding: 20px 30px;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--pk-glass-border);
   margin-bottom: 50px;
   flex-wrap: wrap;
   gap: 20px;
@@ -244,15 +153,16 @@
   transform: translateY(-50%);
   font-size: 1.2em;
   opacity: 0.8;
+  color: var(--pk-accent);
 }
 
 .search-wrapper input {
   width: 100%;
   padding: 14px 14px 14px 45px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--pk-glass-border);
   background: rgba(0, 0, 0, 0.2);
-  color: white;
+  color: var(--pk-text-main);
   font-size: 1rem;
   transition: all 0.3s ease;
 }
@@ -260,12 +170,12 @@
 .search-wrapper input:focus {
   outline: none;
   background: rgba(0, 0, 0, 0.3);
-  border-color: #4facfe;
-  box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.2);
+  border-color: var(--pk-accent);
+  box-shadow: 0 0 0 3px rgba(74, 145, 145, 0.2);
 }
 
 .search-wrapper input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--pk-text-muted);
 }
 
 /* Filter Pills */
@@ -279,7 +189,7 @@
 
 .filter-pill {
   background: transparent;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--pk-text-muted);
   border: none;
   padding: 10px 20px;
   border-radius: 10px;
@@ -290,12 +200,12 @@
 
 .filter-pill:hover {
   color: white;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .filter-pill.active {
-  background: white;
-  color: #132e2e;
+  background: var(--pk-primary);
+  color: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -304,7 +214,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 40px;
-  /* Increased gap */
   position: relative;
   z-index: 1;
   padding-bottom: 40px;
@@ -315,20 +224,20 @@
   grid-column: 1 / -1;
   text-align: center;
   padding: 60px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--pk-glass-bg);
   border-radius: 20px;
-  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border: 1px dashed var(--pk-glass-border);
 }
 
 .no-results p {
   font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--pk-text-muted);
   margin-bottom: 20px;
 }
 
 .reset-btn {
-  background: #4facfe;
-  color: white;
+  background: var(--pk-gold);
+  color: var(--pk-primary-dark);
   border: none;
   padding: 12px 25px;
   border-radius: 50px;
@@ -338,14 +247,14 @@
 }
 
 .reset-btn:hover {
-  background: #00f2fe;
-  box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+  background: var(--pk-gold-hover);
+  box-shadow: 0 5px 15px rgba(244, 196, 48, 0.3);
   transform: translateY(-2px);
 }
 
 /* SKELETON */
 .event-card-skeleton {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--pk-glass-bg);
   padding: 20px;
   border-radius: 20px;
   min-height: 250px;
@@ -367,7 +276,6 @@
     overflow-x: auto;
     padding-bottom: 5px;
     white-space: nowrap;
-    /* Hide scrollbar */
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
@@ -388,7 +296,6 @@
 @media (max-width: 600px) {
   .events-grid {
     grid-template-columns: 1fr;
-    /* Full width cards */
     gap: 25px;
   }
 

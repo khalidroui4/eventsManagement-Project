@@ -63,10 +63,18 @@ if ($method === "GET" && isset($_GET["user_id"]) && isset($_GET["event_id"]) && 
 if ($method === "POST" && $action === "inscrire") {
     $data = json_decode(file_get_contents("php://input"), true);
 
-    if (!$data || !isset($data["user_id"]) || !isset($data["event_id"])) {
+    if (!$data || !isset($data["event_id"])) {
         echo json_encode(["success" => false, "error" => "Invalid data"]);
         exit;
     }
+
+    // SECURITY: Use Session ID
+    $user_id = $_SESSION['user_id'] ?? 0;
+    if (!$user_id) {
+        echo json_encode(["success" => false, "error" => "Unauthorized"]);
+        exit;
+    }
+    $event_id = $data["event_id"];
 
     try {
         // Check if participation already exists
@@ -123,8 +131,15 @@ if ($method === "POST" && $action === "inscrire") {
 if ($method === "POST" && $action === "annuler") {
     $data = json_decode(file_get_contents("php://input"), true);
 
-    if (!$data || !isset($data["user_id"]) || !isset($data["event_id"])) {
+    if (!$data || !isset($data["event_id"])) {
         echo json_encode(["success" => false, "error" => "Invalid data"]);
+        exit;
+    }
+
+    // SECURITY: Use Session ID
+    $user_id = $_SESSION['user_id'] ?? 0;
+    if (!$user_id) {
+        echo json_encode(["success" => false, "error" => "Unauthorized"]);
         exit;
     }
 

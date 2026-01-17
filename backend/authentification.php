@@ -5,10 +5,11 @@ ini_set('display_errors', 1);
 require "config.php";
 
 /* ===== CORS HEADERS ===== */
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Content-Type: application/json");
+// Handled in config.php
+// header("Access-Control-Allow-Origin: *");
+// header("Access-Control-Allow-Headers: Content-Type");
+// header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+// header("Content-Type: application/json");
 
 /* ===== Handle Preflight ===== */
 if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
@@ -108,6 +109,10 @@ if ($action === "login") {
         if ($user && password_verify($data["motdepasse"], $user["passwordU"])) {
             unset($user["passwordU"]);
 
+            // Security: Set Session
+            $_SESSION['user_id'] = $user['idU'];
+            $_SESSION['role'] = $user['roleU'];
+
             echo json_encode([
                 "success" => true,
                 "user" => $user
@@ -125,6 +130,12 @@ if ($action === "login") {
         ]);
     }
 
+    exit;
+}
+/* ================= LOGOUT ================= */
+if ($action === "logout") {
+    session_destroy();
+    echo json_encode(["success" => true]);
     exit;
 }
 
