@@ -20,7 +20,10 @@ if ($method === "GET" && isset($_GET["user_id"]) && $action === "list") {
         e.event_name,
         e.dateE,
         e.placeE,
-        u.username AS creator,
+        e.num_participant,
+        e.capaciteE,
+        e.etat,
+        u.username AS organizer_name,
         p.statut
     FROM participations p
     JOIN evenement e ON p.event_id = e.idE
