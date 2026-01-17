@@ -68,28 +68,97 @@ The system supports three roles: **User**, **Organizer**, and **Admin**, each wi
 
 ## 📁 Project Structure
 
+```text
 project/
 │
 ├── frontend/ (React)
 │   └── src/
-│       ├── pages/          # Main application views
+│       ├── api/
+│       │   ├── authApi.js
+│       │   ├── evaluationsApi.js
+│       │   ├── eventsApi.js
+│       │   ├── organizerRequestsApi.js
+│       │   ├── participationsApi.js
+│       │   ├── profileApi.js
+│       │   └── userApi.js
+│       │
 │       ├── Components/
-│       │   ├── common/     # Shared (Card, Modal, Toast)
-│       │   ├── profile/    # Profile dashboard widgets
-│       │   ├── Navbar.jsx
-│       │   └── Footer.jsx
-│       ├── store/          # Redux Toolkit slices
-│       ├── api/            # API Services
-│       ├── styles/         # CSS Modules
-│       └── utils/          # Helpers
+│       │   ├── common/
+│       │   │   ├── ConfirmModal.jsx
+│       │   │   ├── EventCard.jsx
+│       │   │   ├── Modal.jsx
+│       │   │   ├── ProtectedRoute.jsx
+│       │   │   ├── Skeleton.jsx
+│       │   │   └── Toast.jsx
+│       │   ├── profile/
+│       │   │   ├── AdminDashboard.jsx
+│       │   │   ├── DashboardStats.jsx
+│       │   │   ├── EditProfileModal.jsx
+│       │   │   ├── EventList.jsx
+│       │   │   ├── EventModal.jsx
+│       │   │   ├── OrganizerDashboard.jsx
+│       │   │   ├── OrganizerRequestSection.jsx
+│       │   │   ├── PerformanceChart.jsx
+│       │   │   └── ProfileHeader.jsx
+│       │   ├── footer.jsx
+│       │   └── navbar.jsx
+│       │
+│       ├── context/
+│       │   └── ToastContext.js
+│       │
+│       ├── pages/
+│       │   ├── About.jsx
+│       │   ├── Contact.jsx
+│       │   ├── EventDetails.jsx
+│       │   ├── Events.jsx
+│       │   ├── Home.jsx
+│       │   ├── NotFound.jsx
+│       │   ├── Profile.jsx
+│       │   ├── PublicProfile.jsx
+│       │   ├── Signin.jsx
+│       │   └── Signup.jsx
+│       │
+│       ├── store/
+│       │   ├── authSlice.js
+│       │   ├── evaluationsSlice.js
+│       │   ├── eventsSlice.js
+│       │   ├── organizerRequestsSlice.js
+│       │   ├── participationsSlice.js
+│       │   ├── profileSlice.js
+│       │   └── store.js
+│       │
+│       ├── styles/
+│       │   ├── about.css
+│       │   ├── contact.css
+│       │   ├── eventDetails.css
+│       │   ├── events.css
+│       │   ├── footer.css
+│       │   ├── home.css
+│       │   ├── index.css
+│       │   ├── notFound.css
+│       │   ├── profile.css
+│       │   ├── sign.css
+│       │   └── skeleton.css
+│       │
+│       └── utils/
+│           ├── constants.js
+│           ├── pageTransition.jsx
+│           └── storage.js
 │
 └── project_backend/ (PHP)
-    ├── config.php          # DB & CORS Config
+    ├── admin.php
     ├── authentification.php
-    ├── events.php          # Event CRUD
+    ├── config.php
+    ├── contact.php
+    ├── evaluations.php
+    ├── events.php
+    ├── fix_trigger.php
+    ├── get_public_user.php
+    ├── organizer_requests.php
     ├── participations.php
-    ├── update_profile.php
-    └── admin.php           # Admin Controls
+    ├── stats.php
+    └── update_profile.php
+```
 
 
 
