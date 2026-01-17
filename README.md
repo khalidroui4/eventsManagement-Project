@@ -56,7 +56,7 @@ The system supports three roles: **User**, **Organizer**, and **Admin**, each wi
 
 ---
 
-## 📁 Project Structure
+
 ## 📁 Project Structure
 
 ```text
