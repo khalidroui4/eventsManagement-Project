@@ -69,6 +69,33 @@ We have implemented industry-standard security measures to protect user data and
 
 ---
 
+## 📁 Project Structure
+
+```text
+project/
+│
+├── frontend/ (React)
+│   └── src/
+│       ├── pages/          # Main application views (Home, Profile, etc.)
+│       ├── Components/     # Reusable UI components
+│       │   ├── common/     # Shared components (Card, Modal, Toast)
+│       │   └── profile/    # Profile-specific widgets
+│       ├── store/          # Redux Toolkit slices (State Management)
+│       ├── api/            # API Service layer (Fetch wrapper)
+│       ├── styles/         # CSS Modules & Global Styles
+│       └── utils/          # Helper functions & Constants
+│
+└── project_backend/ (PHP)
+    ├── config.php          # Database & CORS Configuration
+    ├── authentification.php# Auth Logic (Login/Register)
+    ├── events.php          # Event CRUD Operations
+    ├── participations.php  # Participation Logic
+    ├── update_profile.php  # User Profile Management
+    └── admin.php           # Admin capabilities
+```
+
+---
+
 ## ⚙️ Installation & Setup
 
 ### Prerequisites
@@ -76,7 +103,10 @@ We have implemented industry-standard security measures to protect user data and
 *   XAMPP / WAMP (for PHP & MySQL)
 
 ### 1. Backend Setup
-1.  Clone the repository.
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/khalidroui4/gestion-front.git
+    ```
 2.  Move the `project_backend` folder to your server's root (e.g., `htdocs` in XAMPP).
 3.  Configure `config.php` and import the SQL schema.
 
