@@ -13,15 +13,15 @@ The application follows a classic **Client-Server** architecture with a RESTful 
 
 ```mermaid
 graph TD
-    User[User / Client Browser] -->|Interacts| UI[React UI Components]
-    UI -->|Dispatches Action| Redux[Redux Store]
-    Redux -->|Calls Async Thunk| API_Layer[API Utility Functions]
-    API_Layer -->|HTTP Request (Fetch)| Backend[PHP Backend API]
-    Backend -->|SQL Query| Database[(MySQL Database)]
-    Database -->|Result Set| Backend
-    Backend -->|JSON Response| API_Layer
-    API_Layer -->|Payload| Redux
-    Redux -->|State Update| UI
+    User["User / Client Browser"] -->|"Interacts"| UI["React UI Components"]
+    UI -->|"Dispatches Action"| Redux["Redux Store"]
+    Redux -->|"Calls Async Thunk"| API_Layer["API Utility Functions"]
+    API_Layer -->|"HTTP Request (Fetch)"| Backend["PHP Backend API"]
+    Backend -->|"SQL Query"| Database[("MySQL Database")]
+    Database -->|"Result Set"| Backend
+    Backend -->|"JSON Response"| API_Layer
+    API_Layer -->|"Payload"| Redux
+    Redux -->|"State Update"| UI
 ```
 
 ---
