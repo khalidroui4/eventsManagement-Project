@@ -128,16 +128,16 @@
   max-width: 900px;
 }
 
-.profile-section .section-header h3 {
+.profile-section h3 {
   color: #fff;
-  margin-bottom: 0;
+  margin-bottom: 25px;
   font-size: 1.4rem;
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.profile-section .section-header h3::before {
+.profile-section h3::before {
   content: '';
   display: block;
   width: 4px;
@@ -329,6 +329,14 @@
 
 .organizer-form button:hover {
   transform: translateY(-2px);
+}
+
+/* EVENT GRID SMALL (Used in Profile) */
+.events-grid-small {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  width: 100%;
 }
 
 /* RESPONSIVE */
