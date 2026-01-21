@@ -3,7 +3,7 @@ import { API } from "../utils/constants";
 export const updateProfile = async (formData) => {
   const res = await fetch(`${API}/update_profile.php`, {
     method: "POST",
-    // headers: { "Content-Type": "application/json" }, // Remove this to let browser set boundary for FormData
+
     credentials: "include",
     body: formData
   });

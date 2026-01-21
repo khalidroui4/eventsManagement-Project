@@ -4,14 +4,9 @@ ini_set('display_errors', 1);
 
 require "config.php";
 
-/* ===== CORS HEADERS ===== */
-// Handled in config.php
-// header("Access-Control-Allow-Origin: *");
-// header("Access-Control-Allow-Headers: Content-Type");
-// header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-// header("Content-Type: application/json");
 
-/* ===== Handle Preflight ===== */
+
+/* Handle Preflight */
 if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
     http_response_code(200);
     exit;
@@ -20,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
 $data = json_decode(file_get_contents("php://input"), true);
 $action = $_GET["action"] ?? "";
 
-/* ================= REGISTER ================= */
+/* REGISTER */
 if ($action === "register") {
 
     if (
@@ -88,7 +83,7 @@ if ($action === "register") {
     exit;
 }
 
-/* ================= LOGIN ================= */
+/* LOGIN */
 if ($action === "login") {
 
     if (!isset($data["email"]) || !isset($data["motdepasse"])) {
@@ -132,14 +127,14 @@ if ($action === "login") {
 
     exit;
 }
-/* ================= LOGOUT ================= */
+/* LOGOUT */
 if ($action === "logout") {
     session_destroy();
     echo json_encode(["success" => true]);
     exit;
 }
 
-/* ================= INVALID ACTION ================= */
+/* INVALID ACTION */
 echo json_encode([
     "success" => false,
     "error" => "Invalid action"

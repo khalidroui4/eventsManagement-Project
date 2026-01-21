@@ -19,7 +19,7 @@ export default function Profile() {
   useEffect(() => {
     if (!user) return;
     dispatch(fetchParticipations(user.idU));
-    if (user.roleU === "organizer") {
+    if (user.roleU === "organizer" || user.roleU === "admin") {
       dispatch(fetchCreatedEvents(user.idU));
     }
   }, [user, dispatch]);

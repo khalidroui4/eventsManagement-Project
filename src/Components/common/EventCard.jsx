@@ -1,16 +1,16 @@
 import React from "react";
-import "../../styles/events.css"; // Ensure it uses the events css
+import "../../styles/events.css";
 
 export default function EventCard({ event, onClick, actions, isPast }) {
     const isFull = event.capaciteE && event.num_participant >= event.capaciteE;
 
-    // Status Badge Logic
+
     let statusClass = "status-badge";
     let statusText = "";
 
     switch (event.etat) {
         case 'ouvert':
-            // Double check capacity just in case frontend has newer data than DB trigger
+
             if (isFull) {
                 statusClass += " complet";
                 statusText = "Complet";
@@ -24,10 +24,10 @@ export default function EventCard({ event, onClick, actions, isPast }) {
             statusText = "Complet";
             break;
         case 'annule':
-            statusClass += " complet"; // Use red/alert style
+            statusClass += " complet";
             statusText = "Annulé";
             break;
-        default: // termine
+        default:
             statusClass += " ferme";
             statusText = "Terminé";
             break;
@@ -38,19 +38,19 @@ export default function EventCard({ event, onClick, actions, isPast }) {
             className={`event-card-premium ${isPast ? "past" : ""} ${onClick ? "clickable" : ""}`}
             onClick={onClick}
         >
-            {/* BADGE TOP RIGHT */}
+
             <div className={statusClass}>
                 {statusText}
             </div>
 
 
-            {/* HEADER / TITLE */}
+
             <div className="card-header">
                 <h3>{event.event_name}</h3>
                 <span className="organizer-label">Par @{event.organizer_name || "Admin"}</span>
             </div>
 
-            {/* BODY / INFO */}
+
             <div className="card-body">
                 <div className="info-row">
                     <span className="icon">
@@ -78,7 +78,7 @@ export default function EventCard({ event, onClick, actions, isPast }) {
                 )}
             </div>
 
-            {/* FOOTER / STATS */}
+
             <div className="card-footer">
                 <div className="participants-badge">
                     <span className="icon">
@@ -98,7 +98,7 @@ export default function EventCard({ event, onClick, actions, isPast }) {
                 )}
             </div>
 
-            {/* PROGRESS BAR for capacity */}
+
             {event.capaciteE > 0 && (
                 <div className="capacity-bar">
                     <div

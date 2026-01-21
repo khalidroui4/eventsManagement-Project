@@ -8,9 +8,7 @@ require "config.php";
 $method = $_SERVER["REQUEST_METHOD"];
 $action = $_GET["action"] ?? "";
 
-/* =========================
-   LIST PARTICIPATIONS (PROFILE)
-   ========================= */
+/* LIST PARTICIPATIONS (PROFILE) */
 if ($method === "GET" && isset($_GET["user_id"]) && $action === "list") {
     $user_id = $_GET["user_id"];
 
@@ -38,9 +36,7 @@ if ($method === "GET" && isset($_GET["user_id"]) && $action === "list") {
     exit;
 }
 
-/* =========================
-   CHECK IF USER PARTICIPATES (EVENT DETAILS)
-   ========================= */
+/* CHECK IF USER PARTICIPATES (EVENT DETAILS) */
 if ($method === "GET" && isset($_GET["user_id"]) && isset($_GET["event_id"]) && $action === "check") {
     $stmt = $pdo->prepare("
         SELECT 1 
@@ -56,10 +52,7 @@ if ($method === "GET" && isset($_GET["user_id"]) && isset($_GET["event_id"]) && 
     exit;
 }
 
-/* =========================
-   INSCRIRE (PARTICIPATE)
-   USE PROCEDURE Inscrire_utilisateur
-   ========================= */
+/* INSCRIRE (PARTICIPATE) */
 if ($method === "POST" && $action === "inscrire") {
     $data = json_decode(file_get_contents("php://input"), true);
 
@@ -124,10 +117,7 @@ if ($method === "POST" && $action === "inscrire") {
 }
 
 
-/* =========================
-   ANNULER (CANCEL PARTICIPATION)
-   USE PROCEDURE Annuler_participation
-   ========================= */
+/* ANNULER (CANCEL PARTICIPATION) */
 if ($method === "POST" && $action === "annuler") {
     $data = json_decode(file_get_contents("php://input"), true);
 
@@ -160,9 +150,7 @@ if ($method === "POST" && $action === "annuler") {
     exit;
 }
 
-/* =========================
-   FALLBACK
-   ========================= */
+/* FALLBACK */
 echo json_encode([
     "success" => false,
     "error" => "Invalid request"

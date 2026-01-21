@@ -3,7 +3,7 @@
 session_set_cookie_params([
     'lifetime' => 0,
     'path' => '/',
-    'domain' => '', // Valid for current domain
+    'domain' => '', 
     'secure' => false, // Set to true if using HTTPS
     'httponly' => true, // JavaScript cannot access cookie
     'samesite' => 'Lax' // Protects against CSRF
@@ -11,13 +11,10 @@ session_set_cookie_params([
 
 session_start();
 
-// 2. Strict CORS
-// Allow any localhost port (Dynamically)
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 if (strpos($origin, 'http://localhost') === 0) {
     header("Access-Control-Allow-Origin: $origin");
 } else {
-    // Fallback or default
     header("Access-Control-Allow-Origin: http://localhost:3000");
 }
 header("Access-Control-Allow-Credentials: true");

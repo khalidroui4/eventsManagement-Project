@@ -4,18 +4,14 @@ header("Content-Type: application/json");
 
 $action = $_GET["action"] ?? "";
 
-/* ========================
-   GET ALL EVENTS
-   ======================== */
+/*RUN CURSOR: GET ALL EVENTS */
 if ($action === "all_events") {
     $stmt = $pdo->query("SELECT * FROM evenement ORDER BY idE DESC");
     echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
     exit;
 }
 
-/* ========================
-   GET ORGANIZER REQUESTS
-   ======================== */
+/*RUN CURSOR: GET ORGANIZER REQUESTS */
 if ($action === "organizer_requests") {
     $stmt = $pdo->query("
         SELECT 
@@ -31,9 +27,7 @@ if ($action === "organizer_requests") {
     exit;
 }
 
-/* ========================
-   ACCEPT ORGANIZER
-   ======================== */
+/*RUN CURSOR: ACCEPT ORGANIZER */
 if ($action === "accept") {
     $data = json_decode(file_get_contents("php://input"), true);
     $userId = $data["user_id"];
@@ -57,9 +51,7 @@ if ($action === "accept") {
     exit;
 }
 
-/* ========================
-   REFUSE ORGANIZER
-   ======================== */
+/*RUN CURSOR: REFUSE ORGANIZER */
 if ($action === "refuse") {
     $data = json_decode(file_get_contents("php://input"), true);
     $userId = $data["user_id"];
@@ -74,9 +66,7 @@ if ($action === "refuse") {
     exit;
 }
 
-/* ========================
-   RUN CURSOR: ARCHIVER
-   ======================== */
+/*RUN CURSOR: ARCHIVER */
 if ($action === "archiver") {
     try {
         $pdo->query("CALL Archiver()");
@@ -87,9 +77,7 @@ if ($action === "archiver") {
     exit;
 }
 
-/* ========================
-   RUN CURSOR: ETAT
-   ======================== */
+/*RUN CURSOR: ETAT */
 if ($action === "etat") {
     try {
         $pdo->query("CALL Etat()");
@@ -100,9 +88,7 @@ if ($action === "etat") {
     exit;
 }
 
-/* ========================
-   RUN CURSOR: STATISTICS
-   ======================== */
+/*RUN CURSOR: STATISTICS */
 if ($action === "stats") {
     try {
         $pdo->query("CALL Calculer_statistiques()");

@@ -5,7 +5,7 @@ import Skeleton from "../common/Skeleton";
 
 export default function EventList({ title, events, emptyMessage, isPast, renderActions, loading }) {
     const navigate = useNavigate();
-    // ...
+
     return (
         <div className="profile-section">
             <h3>{title}</h3>

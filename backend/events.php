@@ -6,9 +6,7 @@ require "config.php";
 
 $method = $_SERVER["REQUEST_METHOD"];
 
-/* =========================
-   GET EVENTS
-   ========================= */
+/* GET EVENTS */
 if ($method === "GET") {
 
     // Get one event by ID
@@ -65,9 +63,7 @@ if ($method === "GET") {
 }
 
 
-/* =========================
-   UPDATE EVENT
-   ========================= */
+/* UPDATE EVENT */
 if ($method === "POST" && isset($_GET["action"]) && $_GET["action"] === "update") {
 
     $data = json_decode(file_get_contents("php://input"), true);
@@ -116,9 +112,7 @@ if ($method === "POST" && isset($_GET["action"]) && $_GET["action"] === "update"
 }
 
 
-/* =========================
-   DELETE EVENT
-   ========================= */
+/* DELETE EVENT */
 if ($method === "POST" && isset($_GET["action"]) && $_GET["action"] === "delete") {
     $data = json_decode(file_get_contents("php://input"), true);
 
@@ -147,15 +141,12 @@ if ($method === "POST" && isset($_GET["action"]) && $_GET["action"] === "delete"
     try {
         $pdo->beginTransaction();
 
-        // 1. Delete evaluations
         $stmt = $pdo->prepare("DELETE FROM evaluations WHERE event_id = ?");
         $stmt->execute([$id]);
 
-        // 2. Delete participations
         $stmt = $pdo->prepare("DELETE FROM participations WHERE event_id = ?");
         $stmt->execute([$id]);
 
-        // 3. Delete the event
         $stmt = $pdo->prepare("DELETE FROM evenement WHERE idE = ?");
         $stmt->execute([$id]);
 

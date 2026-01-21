@@ -13,13 +13,13 @@ if (!$idU) {
   exit;
 }
 
-// SECURITY: IDOR CHECK
+
 if (!isset($_SESSION['user_id']) || $_SESSION['user_id'] != $idU) {
   echo json_encode(["success" => false, "error" => "Unauthorized: You can only update your own profile"]);
   exit;
 }
 
-// 1. Handle File Upload (if exists)
+
 $profile_image_sql = "";
 $params = [$full_name, $username, $gmailU, $location];
 
@@ -32,8 +32,7 @@ if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPL
   $targetPath = $uploadDir . $fileName;
 
   if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $targetPath)) {
-    // We save the relative path 'uploads/filename' or just filename depending on how frontend serves it
-    // Let's save "uploads/filename"
+
     $dbPath = 'uploads/' . $fileName;
     $profile_image_sql = ", profile_image = ?";
     $params[] = $dbPath;

@@ -1,4 +1,3 @@
-/* PAGE BACKGROUND */
 .events-container {
   min-height: calc(100vh - 100px);
   padding: 40px 10%;
@@ -8,7 +7,7 @@
   margin-top: 100px;
 }
 
-/* Background Decorations */
+
 .events-container::before {
   content: '';
   position: absolute;
@@ -23,9 +22,7 @@
   filter: blur(80px);
 }
 
-/* ===========================
-   EVENT CARD PREMIUM DESIGN
-   =========================== */
+
 .event-card-premium {
   background: var(--pk-glass-bg);
   backdrop-filter: blur(10px);
@@ -33,16 +30,13 @@
   border: 1px solid var(--pk-glass-border);
   border-radius: 20px;
   padding: 25px 25px 35px 25px;
-  /* Extra bottom padding for progress bar */
-  position: relative;
+
   overflow: hidden;
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   height: 100%;
-  /* Better height behavior */
-  min-height: 280px;
-  /* Taller card */
+
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
@@ -58,7 +52,7 @@
   transform: scale(0.98);
 }
 
-/* Status Badge */
+
 .status-badge {
   position: absolute;
   top: 20px;
@@ -91,7 +85,7 @@
   border: 1px solid rgba(149, 165, 166, 0.3);
 }
 
-/* Header */
+
 .card-header {
   margin-bottom: 20px;
   padding-right: 60px;
@@ -116,7 +110,7 @@
   font-style: italic;
 }
 
-/* Body */
+
 .card-body {
   flex-grow: 1;
   display: flex;
@@ -144,7 +138,7 @@
   color: var(--pk-text-muted);
 }
 
-/* Footer & Stats */
+
 .card-footer {
   display: flex;
   justify-content: space-between;
@@ -153,7 +147,7 @@
   padding-top: 15px;
   border-top: 1px solid var(--pk-glass-border);
   position: relative;
-  /* Ensure z-index works */
+
   z-index: 2;
 }
 
@@ -186,7 +180,7 @@
   transform: translateX(3px);
 }
 
-/* Progress Bar */
+
 .capacity-bar {
   position: absolute;
   bottom: 0;
@@ -215,7 +209,7 @@
   z-index: 1;
 }
 
-/* GLASS FILTER BOX */
+
 .filter-box {
   display: flex;
   justify-content: space-between;
@@ -241,7 +235,7 @@
   gap: 15px;
 }
 
-/* Search Input */
+
 .search-wrapper {
   position: relative;
   width: 350px;
@@ -279,7 +273,7 @@
   color: var(--pk-text-muted);
 }
 
-/* Filter Pills */
+
 .status-filters {
   display: flex;
   gap: 10px;
@@ -310,7 +304,7 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* GRID */
+
 .events-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -320,7 +314,7 @@
   padding-bottom: 40px;
 }
 
-/* No Results */
+
 .no-results {
   grid-column: 1 / -1;
   text-align: center;
@@ -353,7 +347,7 @@
   transform: translateY(-2px);
 }
 
-/* SKELETON */
+
 .event-card-skeleton {
   background: var(--pk-glass-bg);
   padding: 20px;
@@ -361,7 +355,7 @@
   min-height: 250px;
 }
 
-/* Responsive */
+
 @media (max-width: 900px) {
   .filter-box {
     flex-direction: column;

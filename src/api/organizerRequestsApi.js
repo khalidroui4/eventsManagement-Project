@@ -11,13 +11,11 @@ export const sendOrganizerRequest = async (user_id, message) => {
 };
 
 export const fetchOrganizerRequests = async () => {
-  // Matched Profile.jsx: admin.php?action=organizer_requests
   const res = await fetch(`${API}/admin.php?action=organizer_requests`, { credentials: "include" });
   return res.json();
 };
 
 export const approveOrganizerRequest = async (user_id) => {
-  // Matched Profile.jsx: admin.php?action=accept
   const res = await fetch(`${API}/admin.php?action=accept`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -28,7 +26,6 @@ export const approveOrganizerRequest = async (user_id) => {
 };
 
 export const rejectOrganizerRequest = async (user_id) => {
-  // Matched Profile.jsx: admin.php?action=refuse
   const res = await fetch(`${API}/admin.php?action=refuse`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

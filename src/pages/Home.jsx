@@ -13,14 +13,13 @@ function Home() {
   const [stats, setStats] = React.useState({
     events: 0,
     users: 0,
-    categories: 0, // We might not have categories in DB yet, kept as 0 or remove
+    categories: 0,
     satisfaction: 100
   });
 
   React.useEffect(() => {
-    // Import moved to top
 
-    // ... inside component
+
     fetch(`${API}/stats.php`)
       .then(res => res.json())
       .then(data => {

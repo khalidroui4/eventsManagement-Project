@@ -10,20 +10,17 @@ import { motion } from "framer-motion";
 import "../styles/profile.css";
 
 export default function PublicProfile() {
-    const { id } = useParams(); // This is the user ID from the URL
+    const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { user: currentUser } = useSelector((state) => state.auth);
 
-    // Local state for the profile being viewed
+
     const [profileUser, setProfileUser] = useState(null);
     const [loadingUser, setLoadingUser] = useState(true);
     const [error, setError] = useState(null);
 
-    // Use redux slice for events but we might need to be careful not to overwrite "my" profile data
-    // if we visit our own profile. However, fetchParticipations takes an ID, so it updates the store.
-    // Ideally we should separate stores or clear it, but for now we reuse existing slice logic
-    // knowing it might refresh the main profile view data too (which is acceptable or even desirable).
+
     const { participations, createdEvents, loading: loadingEvents } = useSelector((state) => state.profile);
 
     useEffect(() => {
@@ -31,18 +28,18 @@ export default function PublicProfile() {
             setLoadingUser(true);
             setError(null);
             try {
-                // 1. Fetch User Details
+
                 const res = await getPublicUser(id);
                 if (res.success) {
                     setProfileUser(res.user);
 
-                    // 2. Fetch Their Events
+
                     dispatch(fetchParticipations(id));
                     if (res.user.roleU === "organizer" || res.user.roleU === "admin") {
                         dispatch(fetchCreatedEvents(id));
                     }
                 } else {
-                    // User not found
+
                     console.error("User fetch error:", res);
                     setError(res.error || "Utilisateur introuvable");
                 }
@@ -54,7 +51,6 @@ export default function PublicProfile() {
             }
         }
 
-        // Redirect to own profile if clicking self
         if (currentUser && currentUser.idU == id) {
             navigate("/profile");
             return;
@@ -106,7 +102,7 @@ export default function PublicProfile() {
 
     return (
         <div className="profile-container">
-            {/* PUBLIC HEADER */}
+
             <div className="profile-header-card">
                 <div className="profile-left">
                     <div className="profile-img">
@@ -147,7 +143,7 @@ export default function PublicProfile() {
                 </div>
             </div>
 
-            {/* ORGANIZER SECTION */}
+
             {(profileUser.roleU === "organizer" || profileUser.roleU === "admin") && (
                 <div>
                     <EventList
@@ -159,7 +155,7 @@ export default function PublicProfile() {
                 </div>
             )}
 
-            {/* PARTICIPATION SECTION */}
+
             <div>
                 <EventList
                     title="Participation aux événements à venir"
