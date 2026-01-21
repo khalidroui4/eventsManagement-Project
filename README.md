@@ -169,4 +169,5 @@ project/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/khalidroui4/gestion-front.git
+git clone https://github.com/khalidroui4/gestion-front.git 
+git clone https://gitlab.com/rouibaa.khalid05/gestion-events
