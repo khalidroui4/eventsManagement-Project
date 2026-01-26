@@ -1,36 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap");
 
 :root {
-  /* PRIMARY TEAL PALETTE - STRICT #255555 VARIATIONS */
   --pk-primary: #255555;
   --pk-primary-dark: #1a3c3c;
-  /* Deep Teal */
   --pk-primary-light: #2f6f6f;
-  /* Muted Lighter Teal */
-
-  /* ACCENT TEAL (Removed Cyan/Blue tones) */
   --pk-accent: #4a9191;
-  /* Muted Teal Accent */
   --pk-accent-light: #76b5b5;
-  /* Soft Light Teal (not bright blue) */
-
-  /* BACKGROUNDS */
   --pk-bg-gradient: linear-gradient(135deg, #1a3c3c 0%, #255555 100%);
   --pk-glass-bg: rgba(26, 60, 60, 0.7);
-  /* Darker glass for better contrast */
   --pk-glass-border: rgba(74, 145, 145, 0.2);
-
-  /* TEXT */
   --pk-text-main: #effafa;
-  /* Very pale teal-white */
   --pk-text-muted: #9fbdbd;
-  /* Muted teal-gray */
-
-  /* BUTTONS */
   --pk-btn-gradient: linear-gradient(90deg, #255555 0%, #2f6f6f 100%);
-
-  /* GOLD ACCENT (TRIAL) */
-  --pk-gold: #F4C430;
+  --pk-gold: #f4c430;
   --pk-gold-hover: #d4a010;
 }
 
@@ -45,14 +27,11 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  /* Allow body to grow with content */
   background: var(--pk-bg-gradient);
-  /* UPDATED GLOBAL BACKGROUND */
   scroll-behavior: smooth;
   display: flex;
   flex-direction: column;
-  /* overflow-x: hidden; - Removed to prevent potential layout locking, let content dictate */
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
   color: var(--pk-text-main);
   overflow-x: hidden;
 }
@@ -74,7 +53,6 @@ body {
   gap: 40px;
   padding: 30px;
   height: auto;
-
 }
 
 .navbar .item {
@@ -93,7 +71,9 @@ body {
   position: relative;
   z-index: 2;
   color: inherit;
-  transition: transform 0.25s ease, color 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease;
   text-align: center;
 }
 
@@ -140,14 +120,12 @@ body {
     padding: 20px;
     gap: 25px;
     -webkit-overflow-scrolling: touch;
-    /* smooth scroll on iOS */
   }
 
   .navbar .item {
     flex-shrink: 0;
   }
 
-  /* Hide the intricate hover effects on mobile to save space/confusion */
   .navbar .linktext:after {
     display: none;
   }
@@ -193,7 +171,6 @@ footer {
 .logout-btn:hover {
   transform: scale(1.1);
   color: #ff6b6b;
-  /* Maintain red for logout warning */
 }
 
 .welcome .linktext {
@@ -201,11 +178,6 @@ footer {
   font-weight: bold;
 }
 
-/* ============================
-   MASTERPIECE POLISH (10/10) 
-   ============================ */
-
-/* 1. Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -222,19 +194,15 @@ footer {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--pk-gold);
-  /* Gold hover state */
 }
 
-/* 2. Custom Text Selection */
 ::selection {
   background: var(--pk-gold);
   color: var(--pk-primary-dark);
 }
 
-/* 3. Refined Typography */
 h1,
 h2,
 h3 {
   letter-spacing: -1px;
-  /* Tighter, more modern look */
 }

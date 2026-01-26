@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEvents, removeEvent } from "../../store/eventsSlice";
 import { loadRequests, approveRequest as approveOrganizerRequest, rejectRequest as rejectOrganizerRequest } from "../../store/organizerRequestsSlice";
@@ -9,12 +9,11 @@ import { API } from "../../utils/constants";
 export default function AdminDashboard() {
     const dispatch = useDispatch();
 
-    // Use generic selectors if possible, or assume state structure
     const allEvents = useSelector((state) => state.events.events);
     const loading = useSelector((state) => state.events.loading);
     const requests = useSelector((state) => state.requests.requests);
 
-    const [messages, setMessages] = React.useState([]);
+    const [messages, setMessages] = useState([]);
 
     useEffect(() => {
         dispatch(fetchEvents());

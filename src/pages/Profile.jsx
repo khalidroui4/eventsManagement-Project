@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "../styles/profile.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchParticipations, fetchCreatedEvents } from "../store/profileSlice";
@@ -14,7 +14,9 @@ import Skeleton from "../Components/common/Skeleton";
 export default function Profile() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const { participations, createdEvents, loading } = useSelector((state) => state.profile);
+  const { participations, createdEvents, loading } = useSelector(
+    (state) => state.profile,
+  );
 
   useEffect(() => {
     if (!user) return;
@@ -28,23 +30,66 @@ export default function Profile() {
     return (
       <PageTransition>
         <div className="profile-container">
-          {/* Header Skeleton */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '50px' }}>
-            <Skeleton width="300px" height="40px" style={{ marginBottom: '40px' }} />
-            <div className="profile-card" style={{ width: '100%', flexDirection: 'row', alignItems: 'center' }}>
-              <Skeleton width="130px" height="130px" style={{ borderRadius: '50%' }} />
-              <div style={{ flex: 1, marginLeft: '40px' }}>
-                <Skeleton width="200px" height="30px" style={{ marginBottom: '20px' }} />
-                <Skeleton width="80%" height="20px" style={{ marginBottom: '10px' }} />
-                <Skeleton width="60%" height="20px" style={{ marginBottom: '10px' }} />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              marginBottom: "50px",
+            }}
+          >
+            <Skeleton
+              width="300px"
+              height="40px"
+              style={{ marginBottom: "40px" }}
+            />
+            <div
+              className="profile-card"
+              style={{
+                width: "100%",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Skeleton
+                width="130px"
+                height="130px"
+                style={{ borderRadius: "50%" }}
+              />
+              <div style={{ flex: 1, marginLeft: "40px" }}>
+                <Skeleton
+                  width="200px"
+                  height="30px"
+                  style={{ marginBottom: "20px" }}
+                />
+                <Skeleton
+                  width="80%"
+                  height="20px"
+                  style={{ marginBottom: "10px" }}
+                />
+                <Skeleton
+                  width="60%"
+                  height="20px"
+                  style={{ marginBottom: "10px" }}
+                />
               </div>
             </div>
           </div>
-          {/* Event List Skeleton */}
           <div>
-            <Skeleton width="250px" height="30px" style={{ marginBottom: '30px' }} />
+            <Skeleton
+              width="250px"
+              height="30px"
+              style={{ marginBottom: "30px" }}
+            />
             <div className="events-grid-small">
-              {[1, 2, 3].map(i => <Skeleton key={i} width="100%" height="200px" style={{ borderRadius: '16px' }} />)}
+              {[1, 2, 3].map((i) => (
+                <Skeleton
+                  key={i}
+                  width="100%"
+                  height="200px"
+                  style={{ borderRadius: "16px" }}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -61,14 +106,14 @@ export default function Profile() {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15
-      }
-    }
+        staggerChildren: 0.15,
+      },
+    },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 }
+    show: { opacity: 1, y: 0 },
   };
 
   return (
@@ -83,12 +128,10 @@ export default function Profile() {
           Bonjour, {user.username} 👋
         </motion.h1>
 
-        {/* PROFILE HEADER */}
         <motion.div variants={itemVariants}>
           <ProfileHeader user={user} />
         </motion.div>
 
-        {/* PARTICIPATING EVENTS */}
         <motion.div variants={itemVariants}>
           <EventList
             title="Événements en cours de participation"
@@ -98,7 +141,6 @@ export default function Profile() {
           />
         </motion.div>
 
-        {/* PAST EVENTS */}
         <motion.div variants={itemVariants}>
           <EventList
             title="Événements passés"
@@ -109,17 +151,24 @@ export default function Profile() {
           />
         </motion.div>
 
-        {/* ROLE SPECIFIC DASHBOARDS */}
         {user.roleU === "organizer" && (
           <motion.div variants={itemVariants}>
-            <OrganizerDashboard createdEvents={createdEvents} user={user} loading={loading} />
+            <OrganizerDashboard
+              createdEvents={createdEvents}
+              user={user}
+              loading={loading}
+            />
           </motion.div>
         )}
 
         {user.roleU === "admin" && (
           <>
             <motion.div variants={itemVariants}>
-              <OrganizerDashboard createdEvents={createdEvents} user={user} loading={loading} />
+              <OrganizerDashboard
+                createdEvents={createdEvents}
+                user={user}
+                loading={loading}
+              />
             </motion.div>
             <motion.div variants={itemVariants}>
               <AdminDashboard />
@@ -127,13 +176,11 @@ export default function Profile() {
           </>
         )}
 
-        {/* ORGANIZER REQUEST (For regular users) */}
         {user.roleU !== "organizer" && user.roleU !== "admin" && (
           <motion.div variants={itemVariants}>
             <OrganizerRequestSection user={user} />
           </motion.div>
         )}
-
       </motion.div>
     </PageTransition>
   );

@@ -13,7 +13,6 @@ export async function updateProfile(userData) {
 }
 
 export async function getPublicUser(id) {
-  // Public user info generally doesn't require creds, but good for consistency or if we protect it later
   const res = await fetch(`${API}/get_public_user.php?id=${id}`, { credentials: "include" });
   return res.json();
 }

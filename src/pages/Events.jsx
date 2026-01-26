@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEvents } from "../store/eventsSlice";
 import { useNavigate } from "react-router-dom";
@@ -25,18 +25,16 @@ export default function Events() {
   useEffect(() => {
     let result = events;
 
-    // Search filter
     if (search.trim() !== "") {
       const s = search.toLowerCase();
       result = result.filter(
         (e) =>
           e.event_name.toLowerCase().includes(s) ||
           (e.descriptionE && e.descriptionE.toLowerCase().includes(s)) ||
-          (e.placeE && e.placeE.toLowerCase().includes(s))
+          (e.placeE && e.placeE.toLowerCase().includes(s)),
       );
     }
 
-    // Status filter
     if (status !== "tous") {
       result = result.filter((e) => e.etat === status);
     }
@@ -44,20 +42,19 @@ export default function Events() {
     setFilteredEvents(result);
   }, [events, search, status]);
 
-  // Framer Motion Variants
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 }
+    show: { opacity: 1, y: 0 },
   };
 
   return (
@@ -71,7 +68,6 @@ export default function Events() {
           Événements disponibles
         </motion.h1>
 
-        {/* PREMIUM FILTER BOX */}
         <motion.div
           className="filter-box"
           initial={{ opacity: 0, scale: 0.95 }}
@@ -105,7 +101,6 @@ export default function Events() {
           </div>
         </motion.div>
 
-        {/* EVENTS GRID */}
         <motion.div
           className="events-grid"
           variants={containerVariants}
@@ -113,27 +108,64 @@ export default function Events() {
           animate="show"
         >
           {loading ? (
-            // Render 6 skeletons
             [...Array(6)].map((_, i) => (
-              <div key={i} className="event-card-premium" style={{ height: 'auto', minHeight: '220px', cursor: 'default' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '15px' }}>
+              <div
+                key={i}
+                className="event-card-premium"
+                style={{
+                  height: "auto",
+                  minHeight: "220px",
+                  cursor: "default",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginBottom: "15px",
+                  }}
+                >
                   <Skeleton width="140px" height="26px" />
-                  <Skeleton width="70px" height="24px" style={{ borderRadius: '20px' }} />
+                  <Skeleton
+                    width="70px"
+                    height="24px"
+                    style={{ borderRadius: "20px" }}
+                  />
                 </div>
-                <div style={{ marginBottom: '20px' }}>
-                  <Skeleton width="50%" height="16px" style={{ marginBottom: '10px' }} />
+                <div style={{ marginBottom: "20px" }}>
+                  <Skeleton
+                    width="50%"
+                    height="16px"
+                    style={{ marginBottom: "10px" }}
+                  />
                   <Skeleton width="30%" height="16px" />
                 </div>
-                <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between' }}>
+                <div
+                  style={{
+                    marginTop: "auto",
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
                   <Skeleton width="100px" height="20px" />
-                  <Skeleton width="90px" height="30px" style={{ borderRadius: '20px' }} />
+                  <Skeleton
+                    width="90px"
+                    height="30px"
+                    style={{ borderRadius: "20px" }}
+                  />
                 </div>
               </div>
             ))
           ) : filteredEvents.length === 0 ? (
             <div className="no-results">
               <p>Aucun événement trouvé pour votre recherche.</p>
-              <button className="reset-btn" onClick={() => { setSearch(""); setStatus("tous"); }}>
+              <button
+                className="reset-btn"
+                onClick={() => {
+                  setSearch("");
+                  setStatus("tous");
+                }}
+              >
                 Tout afficher
               </button>
             </div>

@@ -1,4 +1,3 @@
-/* Global Container */
 .contact-container {
   min-height: 100vh;
   background: var(--pk-bg-gradient);
@@ -7,7 +6,7 @@
   flex-direction: column;
   align-items: center;
   color: var(--pk-text-main);
-  margin-top:70px;
+  margin-top: 70px;
 }
 
 .contact-header {
@@ -27,7 +26,6 @@
   color: var(--pk-text-muted);
 }
 
-/* Layout */
 .contact-content {
   display: flex;
   gap: 30px;
@@ -42,7 +40,6 @@
   }
 }
 
-/* Info Card */
 .contact-info-card {
   flex: 1;
   background: var(--pk-primary-dark);
@@ -94,16 +91,14 @@
   font-weight: 600;
 }
 
-/* Form Card */
 .contact-form-card {
   flex: 1.5;
   background: var(--pk-glass-bg);
   backdrop-filter: blur(12px);
-  padding:20px 50px;
+  padding: 20px 50px;
   border-radius: 20px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--pk-glass-border);
-  
 }
 
 .contact-form-card h2 {
@@ -154,7 +149,9 @@
   font-size: 1.1rem;
   font-weight: bold;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .submit-btn:hover {

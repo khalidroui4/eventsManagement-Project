@@ -15,7 +15,6 @@
   color: white;
 }
 
-
 .profile-card,
 .profile-header-card,
 .profile-section,
@@ -29,7 +28,6 @@
   color: white;
 }
 
-
 .profile-card,
 .profile-header-card {
   padding: 40px;
@@ -41,7 +39,6 @@
   align-items: center;
 }
 
-
 .profile-left {
   flex-shrink: 0;
 }
@@ -50,7 +47,11 @@
   width: 130px;
   height: 130px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--pk-primary) 0%, var(--pk-accent) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--pk-primary) 0%,
+    var(--pk-accent) 100%
+  );
   padding: 4px;
   display: flex;
   justify-content: center;
@@ -64,9 +65,7 @@
   object-fit: cover;
   border-radius: 50%;
   border: 4px solid #1a3c3c;
-
 }
-
 
 .profile-right {
   flex-grow: 1;
@@ -99,7 +98,6 @@
   font-weight: 600;
 }
 
-
 .edit-btn {
   position: absolute;
   top: 25px;
@@ -120,7 +118,6 @@
   transform: translateY(-2px);
 }
 
-
 .profile-section {
   padding: 30px;
   margin: 30px auto;
@@ -137,14 +134,13 @@
 }
 
 .profile-section h3::before {
-  content: '';
+  content: "";
   display: block;
   width: 4px;
   height: 24px;
   background: var(--pk-accent);
   border-radius: 4px;
 }
-
 
 .event-item {
   background: rgba(0, 0, 0, 0.2);
@@ -179,7 +175,6 @@
   padding: 4px 12px;
   border-radius: 4px;
 }
-
 
 .modal-overlay {
   position: fixed;
@@ -285,7 +280,6 @@
   color: white;
 }
 
-
 .organizer-form {
   display: flex;
   flex-direction: column;
@@ -330,14 +324,12 @@
   transform: translateY(-2px);
 }
 
-
 .events-grid-small {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 25px;
   width: 100%;
 }
-
 
 @media (max-width: 768px) {
   .profile-container {
@@ -363,7 +355,6 @@
 
   .row strong {
     color: rgba(255, 255, 255, 0.8);
-
   }
 
   .edit-btn {
@@ -376,7 +367,6 @@
     gap: 20px;
   }
 
-
   .modal {
     width: 90%;
     margin: 10px;
@@ -387,7 +377,6 @@
 
   .modal-actions {
     flex-direction: column-reverse;
-
   }
 
   .save,
@@ -395,7 +384,6 @@
     width: 100%;
   }
 }
-
 
 .event-actions {
   margin-top: 15px;
@@ -468,7 +456,6 @@
   transform: scale(1.05);
   box-shadow: 0 6px 20px rgba(244, 196, 48, 0.3);
 }
-
 
 .messages-grid {
   display: grid;

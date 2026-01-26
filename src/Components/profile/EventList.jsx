@@ -1,4 +1,3 @@
-import React from "react";
 import EventCard from "../common/EventCard";
 import { useNavigate } from "react-router-dom";
 import Skeleton from "../common/Skeleton";

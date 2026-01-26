@@ -1,9 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { login, registerUser } from "../api/authApi";
 
-/* =========================
-   SAFE LOAD USER FROM LOCALSTORAGE
-   ========================= */
 let savedUser = localStorage.getItem("user");
 
 try {
@@ -13,10 +10,6 @@ try {
   localStorage.removeItem("user");
   savedUser = null;
 }
-
-/* =========================
-   THUNKS
-   ========================= */
 
 export const register = createAsyncThunk(
   "auth/register",
@@ -28,7 +21,7 @@ export const register = createAsyncThunk(
     } catch (err) {
       return rejectWithValue(err.message);
     }
-  }
+  },
 );
 
 export const loginUser = createAsyncThunk(
@@ -41,12 +34,8 @@ export const loginUser = createAsyncThunk(
     } catch (err) {
       return rejectWithValue(err.message);
     }
-  }
+  },
 );
-
-/* =========================
-   SLICE
-   ========================= */
 
 const authSlice = createSlice({
   name: "auth",
@@ -67,7 +56,6 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      /* REGISTER */
       .addCase(register.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -80,7 +68,6 @@ const authSlice = createSlice({
         state.error = action.payload;
       })
 
-      /* LOGIN */
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null;

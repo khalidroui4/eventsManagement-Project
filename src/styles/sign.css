@@ -1,4 +1,3 @@
-/* PAGE BACKGROUND */
 .auth-page {
   min-height: 100vh;
   width: 100%;
@@ -12,10 +11,9 @@
   margin-top: 70px;
 }
 
-/* Animated Background Circles */
 .auth-page::before,
 .auth-page::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 400px;
   height: 400px;
@@ -34,7 +32,6 @@
   right: -100px;
 }
 
-/* CARD */
 .auth-card {
   background: var(--pk-glass-bg);
   backdrop-filter: blur(16px);
@@ -78,7 +75,6 @@
   margin-bottom: 30px;
 }
 
-/* INPUTS */
 .auth-card label {
   display: block;
   text-align: left;
@@ -126,7 +122,6 @@
   color: var(--pk-accent);
 }
 
-/* BUTTON */
 .auth-btn {
   background: var(--pk-gold);
   color: var(--pk-primary-dark);
@@ -155,7 +150,6 @@
   transform: none;
 }
 
-/* ERROR */
 .auth-error {
   background: rgba(231, 76, 60, 0.2);
   border: 1px solid #e74c3c;
@@ -166,7 +160,6 @@
   margin-bottom: 20px;
 }
 
-/* FOOTER */
 .auth-footer {
   margin-top: 20px;
   font-size: 0.95rem;
@@ -186,7 +179,6 @@
   text-decoration: underline;
 }
 
-/* HR */
 .auth-card hr {
   border: none;
   height: 1px;

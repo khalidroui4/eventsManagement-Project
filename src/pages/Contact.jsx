@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PageTransition from "../utils/pageTransition";
 import { motion } from "framer-motion";
 import "../styles/contact.css";
@@ -23,9 +23,6 @@ function Contact() {
     e.preventDefault();
     setLoading(true);
 
-    // Import moved to top
-
-    // ...
     try {
       const response = await fetch(`${API}/contact.php`, {
         method: "POST",
@@ -51,7 +48,6 @@ function Contact() {
     <PageTransition>
       <div className="contact-container">
 
-        {/* HEADER */}
         <div className="contact-header">
           <motion.h1
             initial={{ y: -20, opacity: 0 }}
@@ -71,7 +67,6 @@ function Contact() {
 
         <div className="contact-content">
 
-          {/* INFO SIDE */}
           <motion.div
             className="contact-info-card"
             initial={{ x: -30, opacity: 0 }}
@@ -86,7 +81,7 @@ function Contact() {
               </div>
               <div>
                 <h4>Email</h4>
-                <p>support@egestion.com</p>
+                <p>rouibaa.khalid05@gmail.com</p>
               </div>
             </div>
 
@@ -96,7 +91,7 @@ function Contact() {
               </div>
               <div>
                 <h4>Téléphone</h4>
-                <p>+212 6 00 00 00 00</p>
+                <p>+212 690840304</p>
               </div>
             </div>
 
@@ -106,7 +101,7 @@ function Contact() {
               </div>
               <div>
                 <h4>Adresse</h4>
-                <p>Technopark, Rabat, Maroc</p>
+                <p>Tamesna, Rabat, Maroc</p>
               </div>
             </div>
 

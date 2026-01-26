@@ -4,23 +4,19 @@ import {
   getMyOrganizerEvents,
   createEvent,
   deleteEvent,
-  updateEvent
+  updateEvent,
 } from "../api/eventsApi";
 
-/* Fetch events */
-export const fetchEvents = createAsyncThunk(
-  "events/fetch",
-  async () => {
-    return await getAllEvents();
-  }
-);
+export const fetchEvents = createAsyncThunk("events/fetch", async () => {
+  return await getAllEvents();
+});
 
 export const addEvent = createAsyncThunk(
   "events/add",
   async ({ event, user }) => {
     const res = await createEvent(event, user);
     return res;
-  }
+  },
 );
 
 export const editEvent = createAsyncThunk(
@@ -28,7 +24,7 @@ export const editEvent = createAsyncThunk(
   async ({ id, event }) => {
     const res = await updateEvent(id, event);
     return { ...event, idE: id };
-  }
+  },
 );
 
 export const removeEvent = createAsyncThunk(
@@ -36,14 +32,14 @@ export const removeEvent = createAsyncThunk(
   async (eventId) => {
     await deleteEvent(eventId);
     return eventId;
-  }
+  },
 );
 
 const eventsSlice = createSlice({
   name: "events",
   initialState: {
     events: [],
-    loading: false
+    loading: false,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -62,9 +58,9 @@ const eventsSlice = createSlice({
         state.events.unshift(action.payload);
       })
       .addCase(removeEvent.fulfilled, (state, action) => {
-        state.events = state.events.filter(e => e.idE !== action.payload);
+        state.events = state.events.filter((e) => e.idE !== action.payload);
       });
-  }
+  },
 });
 
 export default eventsSlice.reducer;

@@ -1,4 +1,3 @@
-/* Main Container */
 .about-container {
   min-height: 100vh;
   background: var(--pk-bg-gradient);
@@ -6,7 +5,6 @@
   margin-top: 70px;
 }
 
-/* Hero Section */
 .about-hero {
   background: transparent;
   padding: 100px 20px;
@@ -20,7 +18,6 @@
   font-weight: 800;
 }
 
-/* Highlight Text in Hero */
 .about-hero .highlight {
   color: var(--pk-accent-light);
 }
@@ -33,7 +30,6 @@
   color: var(--pk-text-muted);
 }
 
-/* Mission Section */
 .mission-section {
   display: flex;
   justify-content: center;
@@ -67,7 +63,6 @@
   line-height: 1.6;
 }
 
-/* Features Section */
 .features-section {
   padding: 80px 20px;
   text-align: center;
@@ -164,7 +159,6 @@
   color: var(--pk-text-muted);
 }
 
-/* CTA */
 .about-cta {
   padding: 80px 20px;
   text-align: center;

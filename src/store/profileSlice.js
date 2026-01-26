@@ -3,23 +3,22 @@ import {
   updateProfile,
   getMyParticipations,
   getMyCreatedEvents,
-  getAllEvents   // <-- add this
+  getAllEvents,
 } from "../api/profileApi";
-
 
 export const fetchParticipations = createAsyncThunk(
   "profile/participations",
-  async (userId) => await getMyParticipations(userId)
+  async (userId) => await getMyParticipations(userId),
 );
 
 export const fetchCreatedEvents = createAsyncThunk(
   "profile/createdEvents",
-  async (userId) => await getMyCreatedEvents(userId)
+  async (userId) => await getMyCreatedEvents(userId),
 );
 
 export const saveProfile = createAsyncThunk(
   "profile/update",
-  async (data) => await updateProfile(data)
+  async (data) => await updateProfile(data),
 );
 
 const profileSlice = createSlice({
@@ -27,18 +26,17 @@ const profileSlice = createSlice({
   initialState: {
     participations: [],
     createdEvents: [],
-    loading: false
+    loading: false,
   },
   reducers: {
     removeCreatedEvent: (state, action) => {
       state.createdEvents = state.createdEvents.filter(
-        (event) => event.idE !== action.payload
+        (event) => event.idE !== action.payload,
       );
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
-      /* Participations */
       .addCase(fetchParticipations.pending, (state) => {
         state.loading = true;
       })
@@ -49,7 +47,6 @@ const profileSlice = createSlice({
       .addCase(fetchParticipations.rejected, (state) => {
         state.loading = false;
       })
-      /* Created Events */
       .addCase(fetchCreatedEvents.pending, (state) => {
         state.loading = true;
       })
@@ -60,7 +57,7 @@ const profileSlice = createSlice({
       .addCase(fetchCreatedEvents.rejected, (state) => {
         state.loading = false;
       });
-  }
+  },
 });
 
 export const { removeCreatedEvent } = profileSlice.actions;

@@ -3,23 +3,22 @@ import {
   sendOrganizerRequest,
   fetchOrganizerRequests,
   approveOrganizerRequest,
-  rejectOrganizerRequest
+  rejectOrganizerRequest,
 } from "../api/organizerRequestsApi";
 
 export const loadRequests = createAsyncThunk(
   "requests/load",
-  async () => await fetchOrganizerRequests()
+  async () => await fetchOrganizerRequests(),
 );
 
 export const sendRequest = createAsyncThunk(
   "requests/send",
-  async ({ user_id, message }) =>
-    await sendOrganizerRequest(user_id, message)
+  async ({ user_id, message }) => await sendOrganizerRequest(user_id, message),
 );
 
 export const approveRequest = createAsyncThunk(
   "requests/approve",
-  async (user_id) => await approveOrganizerRequest(user_id)
+  async (user_id) => await approveOrganizerRequest(user_id),
 );
 
 export const rejectRequest = createAsyncThunk(
@@ -27,7 +26,7 @@ export const rejectRequest = createAsyncThunk(
   async (user_id) => {
     await rejectOrganizerRequest(user_id);
     return user_id;
-  }
+  },
 );
 
 const requestsSlice = createSlice({
@@ -40,9 +39,11 @@ const requestsSlice = createSlice({
         state.requests = action.payload;
       })
       .addCase(approveRequest.fulfilled, (state, action) => {
-        state.requests = state.requests.filter(r => r.user_id !== action.meta.arg);
+        state.requests = state.requests.filter(
+          (r) => r.user_id !== action.meta.arg,
+        );
       });
-  }
+  },
 });
 
 export default requestsSlice.reducer;
