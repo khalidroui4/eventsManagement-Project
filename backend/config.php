@@ -1,12 +1,11 @@
 <?php
-// 1. Secure Session Cookie Params (Before session_start)
 session_set_cookie_params([
     'lifetime' => 0,
     'path' => '/',
     'domain' => '', 
-    'secure' => false, // Set to true if using HTTPS
-    'httponly' => true, // JavaScript cannot access cookie
-    'samesite' => 'Lax' // Protects against CSRF
+    'secure' => false, 
+    'httponly' => true,
+    'samesite' => 'Lax'
 ]);
 
 session_start();

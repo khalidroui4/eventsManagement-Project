@@ -17,7 +17,7 @@ try {
 
     $stmt = $pdo->query("SELECT AVG(note) as avg_note FROM evaluations");
     $avgNote = $stmt->fetch(PDO::FETCH_ASSOC)['avg_note'];
-    $satisfaction = $avgNote ? round(($avgNote / 5) * 100) : 0; // Default to 0 if no ratings
+    $satisfaction = $avgNote ? round(($avgNote / 5) * 100) : 0; 
 
     echo json_encode([
         "success" => true,

@@ -8,7 +8,6 @@ require "config.php";
 $method = $_SERVER["REQUEST_METHOD"];
 $action = $_GET["action"] ?? "";
 
-/* LIST PARTICIPATIONS (PROFILE) */
 if ($method === "GET" && isset($_GET["user_id"]) && $action === "list") {
     $user_id = $_GET["user_id"];
 
@@ -36,7 +35,6 @@ if ($method === "GET" && isset($_GET["user_id"]) && $action === "list") {
     exit;
 }
 
-/* CHECK IF USER PARTICIPATES (EVENT DETAILS) */
 if ($method === "GET" && isset($_GET["user_id"]) && isset($_GET["event_id"]) && $action === "check") {
     $stmt = $pdo->prepare("
         SELECT 1 
@@ -52,7 +50,6 @@ if ($method === "GET" && isset($_GET["user_id"]) && isset($_GET["event_id"]) && 
     exit;
 }
 
-/* INSCRIRE (PARTICIPATE) */
 if ($method === "POST" && $action === "inscrire") {
     $data = json_decode(file_get_contents("php://input"), true);
 
@@ -61,7 +58,6 @@ if ($method === "POST" && $action === "inscrire") {
         exit;
     }
 
-    // SECURITY: Use Session ID
     $user_id = $_SESSION['user_id'] ?? 0;
     if (!$user_id) {
         echo json_encode(["success" => false, "error" => "Unauthorized"]);
@@ -70,7 +66,6 @@ if ($method === "POST" && $action === "inscrire") {
     $event_id = $data["event_id"];
 
     try {
-        // Check if participation already exists
         $check = $pdo->prepare("
             SELECT idP, statut 
             FROM participations 
@@ -81,7 +76,6 @@ if ($method === "POST" && $action === "inscrire") {
         $row = $check->fetch(PDO::FETCH_ASSOC);
 
         if ($row) {
-            // If exists and was cancelled → reactivate
             if ($row["statut"] === "annulee") {
                 $stmt = $pdo->prepare("
                     UPDATE participations 
@@ -90,7 +84,6 @@ if ($method === "POST" && $action === "inscrire") {
                 ");
                 $stmt->execute([$row["idP"]]);
 
-                // increment participants
                 $pdo->prepare("
                     UPDATE evenement 
                     SET num_participant = num_participant + 1 
@@ -98,7 +91,6 @@ if ($method === "POST" && $action === "inscrire") {
                 ")->execute([$data["event_id"]]);
             }
         } else {
-            // No participation yet → normal insert
             $stmt = $pdo->prepare("CALL Inscrire_utilisateur(?, ?)");
             $stmt->execute([$data["user_id"], $data["event_id"]]);
         }
@@ -117,7 +109,6 @@ if ($method === "POST" && $action === "inscrire") {
 }
 
 
-/* ANNULER (CANCEL PARTICIPATION) */
 if ($method === "POST" && $action === "annuler") {
     $data = json_decode(file_get_contents("php://input"), true);
 
@@ -126,7 +117,6 @@ if ($method === "POST" && $action === "annuler") {
         exit;
     }
 
-    // SECURITY: Use Session ID
     $user_id = $_SESSION['user_id'] ?? 0;
     if (!$user_id) {
         echo json_encode(["success" => false, "error" => "Unauthorized"]);
@@ -150,7 +140,6 @@ if ($method === "POST" && $action === "annuler") {
     exit;
 }
 
-/* FALLBACK */
 echo json_encode([
     "success" => false,
     "error" => "Invalid request"

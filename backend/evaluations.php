@@ -5,7 +5,6 @@ require "config.php";
 $method = $_SERVER["REQUEST_METHOD"];
 $input = json_decode(file_get_contents("php://input"), true);
 
-/* ADD EVALUATION */
 if ($method === "POST") {
     try {
         $stmt = $pdo->prepare("
@@ -27,7 +26,6 @@ if ($method === "POST") {
     exit;
 }
 
-/* GET EVALUATIONS BY EVENT */
 if ($method === "GET" && isset($_GET["event_id"])) {
 
     $stmt = $pdo->prepare("
@@ -43,7 +41,6 @@ if ($method === "GET" && isset($_GET["event_id"])) {
     exit;
 }
 
-/* DELETE EVALUATION */
 if ($method === "DELETE" && isset($_GET["id"])) {
 
     try {

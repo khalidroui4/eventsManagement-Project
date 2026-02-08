@@ -6,7 +6,6 @@ require "config.php";
 
 
 
-/* Handle Preflight */
 if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
     http_response_code(200);
     exit;
@@ -15,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
 $data = json_decode(file_get_contents("php://input"), true);
 $action = $_GET["action"] ?? "";
 
-/* REGISTER */
 if ($action === "register") {
 
     if (
@@ -83,7 +81,6 @@ if ($action === "register") {
     exit;
 }
 
-/* LOGIN */
 if ($action === "login") {
 
     if (!isset($data["email"]) || !isset($data["motdepasse"])) {
@@ -127,14 +124,13 @@ if ($action === "login") {
 
     exit;
 }
-/* LOGOUT */
+
 if ($action === "logout") {
     session_destroy();
     echo json_encode(["success" => true]);
     exit;
 }
 
-/* INVALID ACTION */
 echo json_encode([
     "success" => false,
     "error" => "Invalid action"

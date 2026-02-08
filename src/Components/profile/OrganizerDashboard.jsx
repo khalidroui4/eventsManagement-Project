@@ -16,16 +16,16 @@ export default function OrganizerDashboard({ createdEvents, user, loading }) {
   const [editingEvent, setEditingEvent] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
 
-  const handleAdd = async (formData) => {
-    await dispatch(addEvent({ event: formData, user }));
+  const handleAdd = (formData) => {
+    dispatch(addEvent({ event: formData, user }));
     dispatch(fetchCreatedEvents(user.idU));
     addToast("Événement créé avec succès !", "success");
     setShowModal(false);
   };
 
-  const handleEdit = async (formData) => {
+  const handleEdit = (formData) => {
     if (editingEvent) {
-      await dispatch(editEvent({ id: editingEvent.idE, event: formData }));
+      dispatch(editEvent({ id: editingEvent.idE, event: formData }));
       dispatch(fetchCreatedEvents(user.idU));
       addToast("Événement modifié avec succès !", "success");
       setShowModal(false);
@@ -37,9 +37,9 @@ export default function OrganizerDashboard({ createdEvents, user, loading }) {
     setDeleteId(id);
   };
 
-  const confirmDelete = async () => {
+  const confirmDelete = () => {
     if (deleteId) {
-      await dispatch(removeEvent(deleteId));
+      dispatch(removeEvent(deleteId));
       dispatch(fetchCreatedEvents(user.idU));
       addToast("Événement supprimé !", "info");
       setDeleteId(null);

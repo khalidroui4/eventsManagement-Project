@@ -1,12 +1,9 @@
 <?php
-// Prevent any HTML error output
 ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
-// Ensure JSON header is sent
 header("Content-Type: application/json; charset=UTF-8");
 
-// Catch any fatal errors
 register_shutdown_function(function () {
     $error = error_get_last();
     if ($error && ($error['type'] === E_ERROR || $error['type'] === E_PARSE || $error['type'] === E_COMPILE_ERROR)) {

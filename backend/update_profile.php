@@ -25,8 +25,9 @@ $params = [$full_name, $username, $gmailU, $location];
 
 if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
   $uploadDir = 'uploads/';
-  if (!is_dir($uploadDir))
+  if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0777, true);
+  }
 
   $fileName = time() . '_' . basename($_FILES['profile_image']['name']);
   $targetPath = $uploadDir . $fileName;
@@ -45,12 +46,10 @@ $sql = "UPDATE utilisateur SET full_name = ?, username = ?, gmailU = ?, location
 $stmt = $pdo->prepare($sql);
 $ok = $stmt->execute($params);
 
-// Fetch updated user to return to frontend
 if ($ok) {
   $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE idU = ?");
   $stmt->execute([$idU]);
   $updatedUser = $stmt->fetch(PDO::FETCH_ASSOC);
-  // Be careful with password
   unset($updatedUser['passwordU']);
 
   echo json_encode(["success" => true, "user" => $updatedUser]);

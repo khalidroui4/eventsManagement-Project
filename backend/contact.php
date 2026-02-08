@@ -3,7 +3,6 @@ require "config.php";
 
 $method = $_SERVER["REQUEST_METHOD"];
 
-// POST: Save a new message
 if ($method === "POST") {
     $data = json_decode(file_get_contents("php://input"), true);
 
@@ -31,7 +30,6 @@ VALUES (?, ?, ?, ?)
     exit;
 }
 
-// GET: List all messages (For Admin)
 if ($method === "GET") {
     try {
         $stmt = $pdo->query("SELECT * FROM messages ORDER BY created_at DESC");

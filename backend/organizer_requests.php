@@ -5,7 +5,6 @@ require "config.php";
 $data = json_decode(file_get_contents("php://input"), true);
 $action = $_GET["action"] ?? "";
 
-/* SEND REQUEST */
 if ($action === "send") {
     $stmt = $pdo->prepare("
         INSERT INTO organizer_requests(user_id,message)
@@ -16,7 +15,6 @@ if ($action === "send") {
     exit;
 }
 
-/* LIST REQUESTS (ADMIN) */
 if ($action === "list") {
     $stmt = $pdo->query("
         SELECT o.*, u.username 
@@ -28,7 +26,6 @@ if ($action === "list") {
     exit;
 }
 
-/* APPROVE REQUEST */
 if ($action === "approve") {
     $user_id = $data["user_id"];
 
@@ -44,7 +41,6 @@ if ($action === "approve") {
     exit;
 }
 
-/* REJECT REQUEST */
 if ($action === "reject") {
     $user_id = $data["user_id"];
 

@@ -2,14 +2,15 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+
 require "config.php";
+
+const INPUT_SOURCE = "php://input";
 
 $method = $_SERVER["REQUEST_METHOD"];
 
-/* GET EVENTS */
 if ($method === "GET") {
 
-    // Get one event by ID
     if (isset($_GET["id"])) {
         $stmt = $pdo->prepare("
             SELECT 
@@ -29,7 +30,6 @@ if ($method === "GET") {
         exit;
     }
 
-    // Get events by organizer
     if (isset($_GET["creator_id"])) {
         $stmt = $pdo->prepare("
             SELECT 
@@ -47,7 +47,6 @@ if ($method === "GET") {
         exit;
     }
 
-    // Get all events
     $stmt = $pdo->query("
         SELECT 
             e.*,
@@ -63,13 +62,11 @@ if ($method === "GET") {
 }
 
 
-/* UPDATE EVENT */
 if ($method === "POST" && isset($_GET["action"]) && $_GET["action"] === "update") {
 
-    $data = json_decode(file_get_contents("php://input"), true);
+    $data = json_decode(file_get_contents(INPUT_SOURCE), true);
     $id = (int) $_GET["id"];
 
-    // SECURITY: Auth & Ownership Check
     if (!isset($_SESSION['user_id'])) {
         echo json_encode(["success" => false, "error" => "Unauthorized"]);
         exit;
@@ -112,9 +109,8 @@ if ($method === "POST" && isset($_GET["action"]) && $_GET["action"] === "update"
 }
 
 
-/* DELETE EVENT */
 if ($method === "POST" && isset($_GET["action"]) && $_GET["action"] === "delete") {
-    $data = json_decode(file_get_contents("php://input"), true);
+    $data = json_decode(file_get_contents(INPUT_SOURCE), true);
 
     if (!$data || !isset($data["id"])) {
         echo json_encode(["success" => false, "error" => "Missing id"]);
@@ -123,7 +119,6 @@ if ($method === "POST" && isset($_GET["action"]) && $_GET["action"] === "delete"
 
     $id = (int) $data["id"];
 
-    // SECURITY: Auth & Ownership Check
     if (!isset($_SESSION['user_id'])) {
         echo json_encode(["success" => false, "error" => "Unauthorized"]);
         exit;
@@ -166,12 +161,9 @@ if ($method === "POST" && isset($_GET["action"]) && $_GET["action"] === "delete"
 
 
 
-/* =========================
-   CREATE EVENT (USING PROCEDURE)
-   ========================= */
 if ($method === "POST") {
 
-    $data = json_decode(file_get_contents("php://input"), true);
+    $data = json_decode(file_get_contents(INPUT_SOURCE), true);
 
     try {
         $stmt = $pdo->prepare("
@@ -182,7 +174,7 @@ if ($method === "POST") {
             $data["event_name"],
             $data["dateE"],
             $data["capaciteE"],
-            $_SESSION['user_id'] ?? 0, // Force Session ID
+            $_SESSION['user_id'] ?? 0,
             $data["placeE"] ?? "",
             $data["descriptionE"] ?? ""
         ]);

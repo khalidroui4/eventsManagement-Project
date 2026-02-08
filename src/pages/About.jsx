@@ -26,7 +26,7 @@ function About() {
           <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
         </svg>
       ),
-    },
+    },  
     {
       title: "Inscription",
       desc: "Participez en un clic et gérez vos tickets.",

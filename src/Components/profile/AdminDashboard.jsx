@@ -32,8 +32,8 @@ export default function AdminDashboard() {
         }
     };
 
-    const handleDeleteEvent = async (id) => {
-        await dispatch(removeEvent(id));
+    const handleDeleteEvent = (id) => {
+        dispatch(removeEvent(id));
     };
 
     const totalEvents = allEvents ? allEvents.length : 0;
